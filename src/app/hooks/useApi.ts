@@ -45,7 +45,7 @@ export const useApi = () => {
         (requestOptions as any).body = formDataToSend;
       }
 
-      const response = await fetch(`https://stageroster-back.onrender.com/${route}`, requestOptions);
+      const response = await fetch(`process.env.NEXT_PUBLIC_BACKEND_URL/${route}`, requestOptions);
       const data = await response.json();
 
       if (!response.ok) {
