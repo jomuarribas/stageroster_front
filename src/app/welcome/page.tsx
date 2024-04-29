@@ -12,8 +12,8 @@ export default function Welcome() {
     e.preventDefault();
     const route = `users/verification`;
     const dataForm = {
-      email: e.target.email.value,
-      secretKey: e.target.secretKey.value,
+      email: (document.getElementById('email') as HTMLInputElement).value,
+      secretKey: (document.getElementById('secretKey') as HTMLInputElement).value,
     };
     try {
       await apiFetch(true, 'POST', route, dataForm, '/login');
@@ -48,7 +48,7 @@ export default function Welcome() {
           Cuando verifiques tu cuenta ya podrás entrar a la plataforma y empezar
           a disfrutar de todas las funcionalidades que te ofrecemos.
         </p>
-        <button className="emptyButton" onSubmit={handleVerification}>
+        <button className="emptyButton">
           Verificar
         </button>
       </form>

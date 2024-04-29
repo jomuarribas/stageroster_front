@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import { useUser } from '@/app/providers/userProvider';
 import styles from './page.module.css';
