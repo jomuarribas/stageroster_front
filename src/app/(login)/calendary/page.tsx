@@ -1,27 +1,38 @@
 'use client';
+import React, { useRef, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import styles from './page.module.css';
-import './calendary.css';
 import esLocale from '@fullcalendar/core/locales/es';
-import { useRef, useState } from 'react';
+import styles from './page.module.css';
 import { useApi } from '@/app/hooks/useApi';
 import { useUser } from '@/app/providers/userProvider';
-import { set } from 'react-hook-form';
+
+interface Event {
+  _id: string;
+  title: string;
+  date: string;
+  extendedProps: {
+    eventTitle: string;
+    description: string;
+    location: string;
+    groupName?: string;
+  };
+  status?: string;
+}
 
 export default function Calendary() {
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [calendary, setCalendary] = useState(false);
-  const formRef = useRef(null);
-  const { user, groups, events, setEvents } = useUser();
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [calendary, setCalendary] = useState<boolean>(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { user, events, setEvents } = useUser();
   const { apiFetch } = useApi();
 
   const toogleCalendary = () => {
     setCalendary(!calendary);
   };
 
-  const handleEventClick = (clickInfo) => {
+  const handleEventClick = (clickInfo: { event: Event }) => {
     setSelectedEvent(clickInfo.event);
   };
 
@@ -43,45 +54,20 @@ export default function Calendary() {
       };
       const fetch = await apiFetch(true, 'POST', route, event, null);
       if (fetch.message) {
-        setEvents((currentEvents) => [...currentEvents, fetch.event]);
-        formRef.current.reset();
+        setEvents((currentEvents: Event[]) => [...currentEvents, fetch.event]);
+        if (formRef.current) formRef.current.reset();
       }
     } catch (error) {
       console.error('Error al añadir evento personal:', error);
     }
   };
+
   const deleteGroupEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const name = e.target.parentElement.children[0].innerText;
-    const match = name.match(/\(([^)]+)\)/);
-    const date = name.replace(/\([^)]*\)/g, '').trim();
-    const reverseDate = {
-      date: date.split('-').reverse().join('-'),
-    };
-    await apiFetch(
-      true,
-      'DELETE',
-      `groups/deleteevent/${match[1]}`,
-      reverseDate,
-      null,
-    );
-    setEvents(events.filter((event) => event.date !== reverseDate.date));
   };
 
   const deletePersonalEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const date = e.target.parentElement.children[0].innerText;
-    const reverseDate = {
-      date: date.split('-').reverse().join('-'),
-    };
-    await apiFetch(
-      true,
-      'DELETE',
-      `users/deletemydate/${user._id}`,
-      reverseDate,
-      null,
-    );
-    setEvents(events.filter((event) => event.date !== reverseDate.date));
   };
 
   return (
