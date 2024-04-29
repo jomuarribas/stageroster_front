@@ -1,0 +1,100 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  background-color: var(--sr-secundary-color);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+}
+
+.logo > img {
+  margin-top: 15px;
+  width: 80px;
+  height: 80px;
+  justify-self: center;
+}
+
+.logo > h1 {
+  display: flex;
+  text-align: center;
+  color: var(--sr-pink-color-primary);
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.registerForm div:nth-child(1) > h2 {
+  color: var(--sr-color-primary);
+  width: 300px;
+  margin-bottom: -10px;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  color: var(--sr-primary-color);
+  gap: 10px;
+}
+
+.registerForm div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  position: relative;
+}
+
+.registerForm div sup {
+  font-size: 13px;
+}
+
+.registerForm input {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--sr-primary-color);
+  border-bottom: 1px solid var(--sr-primary-color);
+  outline: none;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.errors {
+  color: var(--sr-pink-color-primary);
+  font-size: 11px;
+  position: absolute;
+  bottom: -11px;
+  right: 0;
+  transition: 200ms;
+}
+
+input.inputError {
+  border-bottom: 1px solid var(--sr-pink-color-primary);
+}
+
+.registerForm a {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--sr-pink-color-primary);
+  transition: 100ms;
+  margin-bottom: 30px;
+}
+
+.registerForm a:hover {
+  color: var(--sr-color-primary);
+}
+
+.registerForm button {
+  margin-top: 15px;
+}

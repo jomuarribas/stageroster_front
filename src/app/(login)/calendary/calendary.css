@@ -1,0 +1,100 @@
+.fc {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+}
+
+.fc-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 20px;
+}
+
+.fc-toolbar-title {
+  font-weight: 400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc-header-toolbar {
+  text-align: center;
+}
+
+.fc-toolbar-chunk button {
+  width: 40px;
+  height: 30px;
+}
+
+.fc .fc-button .fc-icon {
+  font-size: 15px;
+  vertical-align: super;
+}
+
+.fc .fc-button-primary {
+  background-color: var(--sr-blue-color-secundary);
+}
+
+.fc .fc-button-primary:hover {
+  background-color: var(--sr-blue-color-secundary);
+}
+
+.fc-event-main-frame {
+  text-align: center;
+  font-size: 10px;
+}
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  min-height: 10px;
+}
+
+.fc-icon:hover {
+  color: var(--sr-color-primary);
+}
+
+.event-details {
+  display: flex;
+  color: var(--sr-primary-color);
+  background-color: var(--sr-secundary-color);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  width: 350px;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 15px;
+  gap: 5px;
+}
+
+.event-details h3 {
+  color: var(--sr-blue-color-primary);
+  font-size: medium;
+}
+
+.event-details p {
+  font-size: 13px;
+}
+
+.event-details p:nth-child(2) {
+  color: var(--sr-blue-color-primary);
+}
+
+.event-details p:nth-child(4) {
+  margin-top: 15px;
+  text-align: justify;
+}
+
+.event-details button {
+  font-size: 14px;
+  font-weight: 200;
+  width: 70px;
+  height: 30px;
+  padding: 0;
+  margin-top: 15px;
+}

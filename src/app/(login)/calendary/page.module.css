@@ -1,0 +1,224 @@
+.calendary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.calendaryTitle {
+  background-color: var(--sr-blue-color-primary);
+  color: var(--sr-blue-color-secundary);
+  font-size: 20px;
+  width: 100vw;
+  text-align: center;
+  padding: 5px;
+  box-shadow: 0 2px 3px var(--sr-blue-color-secundary);
+}
+
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 15px auto;
+  max-width: 370px;
+  height: 350px;
+  min-height: 350px;
+  transition: 200ms;
+}
+
+.toogleCalendary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 250px;
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto;
+  background: rgb(134, 172, 199);
+  background: linear-gradient(
+    95deg,
+    var(--sr-blue-color-primary) 0%,
+    #86acc77d 50%,
+    var(--sr-blue-color-primary) 100%
+  );
+}
+
+.toogleCalendary p {
+  color: var(--sr-blue-color-secundary);
+  transition: 100ms;
+  height: 100%;
+  animation: toogleCalendary 3s ease-in-out infinite;
+}
+
+@keyframes toogleCalendary {
+  0% {
+    transform: scale(1);
+  }
+  5% {
+    transform: scale(0.97);
+  }
+  10% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(0.97);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.toogleCalendary p span {
+  color: var(--sr-blue-color-secundary);
+  vertical-align: middle;
+}
+
+.toogleCalendaryOff {
+  display: none;
+}
+
+.grupalDates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.grupalDates div,
+.personalDates div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 10px 20px 10px;
+  border-top: 1px solid var(--sr-blue-color-secundary);
+}
+
+.grupalDates div:first-of-type,
+.personalDates div:first-of-type {
+  border-top: none !important;
+}
+
+.grupalDates div button,
+.personalDates div button {
+  background-color: transparent;
+  border: 1px solid var(--sr-blue-color-secundary);
+  color: var(--sr-blue-color-secundary);
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  transition: 100ms;
+  margin-top: 10px;
+  transform: scale(0.9);
+}
+
+.grupalDates h3,
+.personalDates h3 {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  color: var(--sr-primary-color);
+  margin: 10px 0;
+  font-size: 18px;
+  background: linear-gradient(
+    70deg,
+    var(--sr-blue-color-primary) -50%,
+    var(--sr-blue-color-secundary) 50%,
+    var(--sr-blue-color-primary) 150%
+  );
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.dates div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+  width: 100%;
+}
+
+.dates div input::placeholder {
+  color: var(--sr-taupe-gray);
+  font-size: 14px;
+}
+
+.dates input {
+  height: 28px;
+}
+
+.dates div:nth-child(1) form {
+  color: var(--sr-blue-color-secundary);
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  gap: 5px;
+}
+
+.dates div:nth-child(1) input {
+  margin-bottom: 10px;
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--sr-secundary-color);
+  border-radius: 0;
+  color: var(--sr-secundary-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dates div:nth-child(1) h3 {
+  color: var(--sr-blue-color-secundary);
+  margin-bottom: 15px;
+}
+
+.dates div:nth-child(1) button {
+  align-self: center;
+  background-color: transparent;
+  border: 1px solid var(--sr-blue-color-secundary);
+  color: var(--sr-blue-color-secundary);
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  transition: 100ms;
+}
+
+.dates div:nth-child(1) button:hover {
+  background-color: var(--sr-blue-color-secundary);
+  color: var(--sr-primary-color);
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  border-top: 1px dotted var(--sr-blue-color-secundary);
+  gap: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+}

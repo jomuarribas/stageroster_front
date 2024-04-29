@@ -1,0 +1,30 @@
+.loader {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  width: 100%;
+  min-height: 100svh;
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.loader_spinner {
+  width: 50px;
+  height: 50px;
+  background-image: url('/assets/logo.png');
+  background-size: contain;
+  animation: spin 2s linear infinite;
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

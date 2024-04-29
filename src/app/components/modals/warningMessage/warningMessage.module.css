@@ -1,0 +1,98 @@
+.warningContainer {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  height: 100svh;
+  width: 100%;
+  z-index: 10000;
+  top: 0;
+  backdrop-filter: blur(4px);
+}
+
+.warningMessage {
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  width: 300px;
+  top: 0;
+  background-color: var(--sr-primary-color);
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.358);
+  user-select: none;
+}
+
+.visible {
+  animation: slideIn 0.5s forwards;
+}
+
+.close {
+  display: none;
+}
+.warningMessage div:nth-child(1) {
+  display: flex;
+  background-color: #fca015;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.warningMessage div:nth-child(1) span {
+  font-size: 60px;
+  font-weight: 100;
+  text-align: center;
+  padding: 5px;
+  width: 100%;
+  cursor: default;
+}
+
+.warningMessage div:nth-child(1) span:hover {
+  color: var(--sr-primary-color);
+}
+
+.warningMessage div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  padding: 13px;
+}
+
+.warningMessage div:nth-child(2) p {
+  font-size: 15px;
+  font-weight: 200;
+  text-align: center;
+}
+
+.warningMessage div:nth-child(2) button {
+  color: #fca015;
+  border-color: #fca015;
+  width: 80px;
+  height: 30px;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.warningMessage div:nth-child(2) button:hover {
+  color: var(--sr-secundary-color);
+  border-color: var(--sr-secundary-color);
+}
+
+@keyframes slideIn {
+  0% {
+    transform: scale(0);
+  }
+  35% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,96 @@
+.headerH {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  background-color: var(--sr-secundary-color);
+  width: 100%;
+  height: 50px;
+  z-index: 250;
+}
+
+.header div:nth-child(1) {
+  display: flex;
+  align-items: center;
+  height: 55px;
+  width: 40%;
+}
+
+.header div:nth-child(1) a {
+  margin-left: 15px;
+  font-size: 15px;
+}
+
+.header div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  height: 55px;
+}
+
+.header img {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.header h1 {
+  font-size: 15px;
+  color: var(--sr-pink-color-primary);
+  margin-left: 10px;
+}
+
+.header div:nth-child(3) {
+  width: 40%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: 15px;
+}
+
+.header div a p {
+  align-self: center;
+  font-size: 14px;
+  color: var(--sr-primary-color);
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 100ms;
+}
+
+.header div a p:hover {
+  color: var(--sr-pink-color-primary);
+  text-shadow: 1px 1px 20px var(--sr-pink-color-primary);
+}
+
+.header div span {
+  display: none;
+}
+
+.logoutIcon {
+  display: flex !important;
+  font-size: 20px;
+  margin: 0 -3px;
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+  .header div span {
+    display: flex;
+    font-size: 27px;
+    margin: 0;
+  }
+  .header div a p {
+    display: none;
+  }
+  .header h1 {
+    font-size: 13px;
+  }
+  .logoutIcon {
+    display: none !important;
+  }
+}

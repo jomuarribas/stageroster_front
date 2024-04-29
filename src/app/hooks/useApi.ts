@@ -1,0 +1,78 @@
+import { useRouter } from 'next/navigation';
+import { useAlert } from '../providers/AlertContext';
+import { useSession } from 'next-auth/react';
+import { useState } from 'react';
+
+
+export const useApi = () => {
+  const router = useRouter();
+  const { setSuccessMessage, setErrorMessage, setWarningMessage } = useAlert();
+  const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(false);
+  const token = session?.user.token;
+ 
+
+  const apiFetch = async (
+    alert: boolean,
+    method: string,
+    route: string,
+    formData: FormData | null,
+    next: string | null, 
+    headersContent: string = 'application/json') => {
+    try {
+      setLoading(true);
+      const headers: { [key: string]: string } = {}; 
+      let formDataToSend: FormData | string | null = formData;
+  
+
+      if (formData instanceof FormData) {
+        formDataToSend = formData;
+      } else if (formData !== null) {
+        if (headersContent === 'application/json') {
+          headers['Content-Type'] = headersContent;
+          formDataToSend = JSON.stringify(formData);
+        } else {
+          formDataToSend = formData;
+        }
+      }
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const requestOptions = {
+        method: method,
+        headers: headers,
+        body: formDataToSend
+      };
+
+      const response = await fetch(`https://stageroster-back.onrender.com/${route}`, requestOptions);
+      const data = await response.json();
+
+
+      if (!response.ok) {
+        setLoading(false);
+        if (data.error) {setErrorMessage(data.error)} else {setWarningMessage(data.warning)};
+        return;
+      }
+
+      if (response.ok) {
+        setLoading(false);
+        if (alert) {
+        setSuccessMessage(data.message)
+        }
+        if (next) {
+          router.push(next);
+        }
+        
+        return data;
+      }
+    } catch (err) {
+      setLoading(false);
+      console.error(err);
+      setErrorMessage('Hubo un error al realizar la solicitud.');
+    }
+  };
+
+  return { apiFetch, loading };
+};

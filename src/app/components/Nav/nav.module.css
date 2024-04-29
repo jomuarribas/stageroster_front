@@ -1,0 +1,64 @@
+.nav {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    justify-content: space-between;
+    background-color: #333333f6;
+    color: #fff;
+    height: 50%;
+    width: 230px;
+    z-index: 200;
+    padding: 20px 0;
+    border-radius: 0 0 0 10px;
+    transition: 400ms;
+    padding-right: 30px;
+  }
+
+  .closeNav {
+    top: -450px;
+  }
+
+  .nav div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 17px;
+  }
+
+  .nav a {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    color: var(--sr-primary-color);
+    transition: 200ms;
+  }
+
+  .nav a span {
+    margin-left: 10px;
+  }
+
+  .nav div a:hover {
+    color: var(--sr-pink-color-primary);
+  }
+
+  .nav div:nth-child(2) a:nth-child(1),
+  .nav div:nth-child(2) a:nth-child(2) {
+    font-size: 17px;
+  }
+
+  @keyframes openMenu {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

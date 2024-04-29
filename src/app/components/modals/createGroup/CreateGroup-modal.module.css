@@ -1,0 +1,80 @@
+.groupsModal {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100svh;
+  backdrop-filter: blur(5px);
+  pointer-events: all;
+  z-index: 1000;
+}
+
+.groupsModal div {
+  position: fixed;
+  display: flex;
+  background-color: var(--sr-secundary-color);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 350px;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.groupsModal div input::placeholder {
+  color: var(--sr-taupe-gray);
+  font-size: 12px;
+}
+
+.groupsModal div form {
+  color: var(--sr-primary-color);
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  gap: 5px;
+  padding: 20px;
+}
+
+.groupsModal div input {
+  margin-bottom: 10px;
+  color: var(--sr-primary-color) !important;
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--sr-primary-color);
+  color: var(--sr-secundary-color);
+}
+
+.groupsModal div h3 {
+  color: var(--sr-blue-color-primary);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.groupsModal div button {
+  align-self: center;
+  background-color: transparent;
+  border: 1px solid var(--sr-blue-color-primary);
+  color: var(--sr-blue-color-primary);
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  transition: 100ms;
+}
+
+.groupsModal div button:hover {
+  background-color: var(--sr-blue-color-primary);
+  color: var(--sr-primary-color);
+}
+
+.logGroupModal {
+  border-top: 1px dotted var(--sr-pink-color-primary);
+  padding-top: 15px;
+  margin: 15px 0;
+}
