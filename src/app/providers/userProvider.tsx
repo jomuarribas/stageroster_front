@@ -11,7 +11,7 @@ interface User {
   img?: string;
   surnames: string;
   groups: [];
-  myDates: [];
+  myDates: string[]; // Corregido: especificar el tipo de myDates como string[]
 }
 
 interface Group {
@@ -21,13 +21,16 @@ interface Group {
   description: string;
   members: [];
   createdAt: string;
+  events: []; // Corregido: especificar el tipo de events como string[]
 }
 
 const UserContext = createContext({
   user: {} as User,
   setUser: (userData: User) => {},
-  groups: [],
-  setGroups: (groupsData: Group) => [],
+  groups: [] as Group[], // Corregido: especificar el tipo de los elementos del array como Group
+  setGroups: (groupsData: Group[]) => [], // Corregido: especificar el tipo de groupsData como Group[]
+  events: [] as string[], // Corregido: especificar el tipo como string[]
+  setEvents: (eventsData: string[]) => [], // Corregido: especificar el tipo como string[]
 });
 
 export default function UserProvider({
@@ -36,8 +39,8 @@ export default function UserProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<User>({} as User);
-  const [groups, setGroups] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [groups, setGroups] = useState<Group[]>([]); // Corregido: especificar el tipo de groups como Group[]
+  const [events, setEvents] = useState<string[]>([]); // Corregido: especificar el tipo de events como string[]
   const { apiFetch, loading } = useApi();
   const { data: session, status } = useSession();
 
@@ -65,8 +68,8 @@ export default function UserProvider({
               );
               setGroups(groupsData);
               setEvents([
-                ...userData.mydates,
-                ...groupsData.map((group) => group.events).flat(),
+                ...userData.myDates,
+                ...groupsData.map((group: Group) => group.events).flat(),
               ]);
             } catch (error) {
               console.error('Error al obtener los grupos:', error);
@@ -104,3 +107,4 @@ export default function UserProvider({
 }
 
 export const useUser = () => useContext(UserContext);
+
