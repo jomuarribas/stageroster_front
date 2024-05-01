@@ -1,9 +1,11 @@
 'use client';
 import { useForm } from 'react-hook-form';
+import ReCAPTCHA from "react-google-recaptcha";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useApi } from '../hooks/useApi';
 import styles from './page.module.css';
+import { useRef } from 'react';
 
 type formDataSend = {
   username: string;
@@ -16,6 +18,7 @@ type formDataSend = {
 
 export default function Register() {
   const { apiFetch } = useApi();
+  const recaptcha = useRef()
 
   const {
     register,
@@ -26,10 +29,10 @@ export default function Register() {
   const password = watch('password', '');
 
   const submit = async (data: formDataSend) => {
-    // const captchaValue = recaptcha.current.getValue()
-    // if (!captchaValue) {
-    //   return
-    // }
+     const captchaValue = recaptcha.current.getValue()
+     if (!captchaValue) {
+       return
+    }
     const { confirmPassword, ...formDataRest } = data;
     const route = 'users/register';
     const next = '/welcome';
@@ -158,6 +161,11 @@ export default function Register() {
               </p>
             )}
           </div>
+          <ReCAPTCHA
+              className={styles.reCaptcha}
+              sitekey='6LeJUMspAAAAAEG_ftXLvDNRDpwZ_E4W_c9Y1iOB'
+              ref={recaptcha}
+            />
 
           <button className="emptyButton" type="submit">
             Registrar

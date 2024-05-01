@@ -69,7 +69,7 @@ export default function UserProvider({
               );
               setGroups(groupsData);
               setEvents([
-                ...userData.myDates,
+                ...userData.mydates,
                 ...groupsData.map((group: Group) => group.events).flat(),
               ]);
             } catch (error) {

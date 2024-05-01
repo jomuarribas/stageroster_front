@@ -25,6 +25,7 @@
   height: 350px;
   min-height: 350px;
   transition: 200ms;
+  margin-bottom: 30px;
 }
 
 .toogleCalendary {

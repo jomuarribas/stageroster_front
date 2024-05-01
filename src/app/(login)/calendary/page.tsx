@@ -1,14 +1,10 @@
 // @ts-nocheck
 'use client';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
 import styles from './page.module.css';
-import './calendary.css';
-import esLocale from '@fullcalendar/core/locales/es';
 import { useRef, useState } from 'react';
 import { useApi } from '@/app/hooks/useApi';
 import { useUser } from '@/app/providers/userProvider';
+import CalendarComponent from '@/app/components/Calendar/Calendar';
 
 export default function Calendary() {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -104,45 +100,8 @@ export default function Calendary() {
             !calendary ? styles.toogleCalendaryOff : styles.calendarContainer
           }
         >
-          <FullCalendar
-            plugins={[dayGridPlugin, interactionPlugin]}
-            initialView="dayGridMonth"
-            editable={true}
-            selectable={true}
-            locale={esLocale}
-            headerToolbar={{
-              left: 'prev',
-              center: 'title',
-              right: 'next',
-            }}
-            weekends={true}
-            events={events.filter(
-              (event) =>
-                (event.title === 'Grupal' && event.status === 'confirmed') ||
-                event.title === 'Personal',
-            )}
-            eventClick={handleEventClick}
-          />
+          <CalendarComponent />
         </div>
-        {selectedEvent && (
-          <div className="event-details">
-            <h3>
-              -{' '}
-              {!selectedEvent.extendedProps.groupName
-                ? 'Evento Personal'
-                : selectedEvent.extendedProps.groupName}{' '}
-              -
-            </h3>
-            <h3>{selectedEvent.extendedProps.eventTitle}</h3>
-            <p>({selectedEvent.startStr})</p>
-            <p>Ubicacion: {selectedEvent.extendedProps.location}</p>
-            <p>{selectedEvent.extendedProps.description}</p>
-            <button className="emptyButton" onClick={closeDetails}>
-              Cerrar
-            </button>{' '}
-          </div>
-        )}
-
         <div className={styles.grupalDates}>
           <h3>Eventos Grupales</h3>
           {events.filter(

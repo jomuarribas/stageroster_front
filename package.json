@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fullcalendar/core": "^6.1.11",
-    "@fullcalendar/daygrid": "^6.1.11",
-    "@fullcalendar/interaction": "^6.1.11",
-    "@fullcalendar/react": "^6.1.11",
+    "date-fns": "^3.6.0",
+    "moment": "^2.30.1",
     "next": "14.1.4",
     "next-auth": "^4.24.7",
     "react": "^18",
+    "react-calendar": "^5.0.0",
     "react-dom": "^18",
+    "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.51.2"
   },
   "devDependencies": {
