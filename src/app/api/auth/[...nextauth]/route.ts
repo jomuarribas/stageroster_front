@@ -43,8 +43,10 @@ const handler = NextAuth({
       return session;
     },
   },
+  
   pages: {
     signIn: "/login",
+    signOut: "/login",
   },
 });
 
