@@ -12,7 +12,7 @@ const Nav: FC<NavProps> = ({ isOpen, onClose }) => {
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
-    signOut();
+    signOut({ callbackUrl: '/login' });
   };
   return (
     <nav className={`${styles.nav} ${!isOpen ? styles.closeNav : ''}`}>
