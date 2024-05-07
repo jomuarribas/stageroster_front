@@ -1,0 +1,79 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.contact > form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: center;
+  gap: 10px;
+  width: 600px;
+}
+
+.contact > form p {
+  align-self: self-start;
+}
+
+.contact > form input {
+  margin-bottom: 10px;
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--sr-secundary-color);
+  border-radius: 0;
+  color: var(--sr-secundary-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 8px 0;
+}
+
+.contact > form label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contact > form textarea {
+  margin-top: 10px;
+  padding: 5px;
+  outline: none;
+  width: 100%;
+  height: 200px;
+  background-color: transparent;
+  border-bottom: 1px solid var(--sr-secundary-color);
+  border-radius: 0;
+  color: var(--sr-secundary-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.contact > form button {
+  align-self: center;
+  background-color: transparent;
+  border: 1px solid var(--sr-blue-color-secundary);
+  color: var(--sr-blue-color-secundary);
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  transition: 100ms;
+}
+
+.contact > form button:hover {
+  background-color: var(--sr-blue-color-secundary);
+  color: var(--sr-primary-color);
+}
+
+@media (max-width: 650px) {
+  .contact > form {
+    width: 90%;
+  }
+}
