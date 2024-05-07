@@ -1,5 +1,5 @@
 'use client';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -15,6 +15,12 @@ interface formDataSend {
 export default function Login() {
   const { setErrorMessage } = useAlert();
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  const token = session?.user.token;
+  if (status === 'authenticated' && token) {
+    localStorage.setItem('token', token);
+  }
 
   const {
     register,
