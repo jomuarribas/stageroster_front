@@ -17,10 +17,6 @@ export default function Login() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  if (status === 'authenticated') {
-    localStorage.setItem('token', session.user.token);
-  }
-
   const {
     register,
     handleSubmit,
@@ -33,6 +29,10 @@ export default function Login() {
       password: data.password,
       redirect: false,
     });
+
+    if (status === 'authenticated') {
+      localStorage.setItem('token', session.user.token);
+    }
 
     if (!responseNextAuth?.error) {
       router.push('/home');
