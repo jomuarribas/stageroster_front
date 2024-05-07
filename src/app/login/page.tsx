@@ -30,7 +30,7 @@ export default function Login() {
       redirect: false,
     });
 
-    if (status === 'authenticated') {
+    if (status === 'authenticated' && typeof window !== 'undefined') {
       localStorage.setItem('token', session.user.token);
     }
 
