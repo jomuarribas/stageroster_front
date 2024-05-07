@@ -8,7 +8,13 @@ export const useApi = () => {
   const { setSuccessMessage, setErrorMessage, setWarningMessage } = useAlert();
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
-  const token = session?.user.token;
+  //const token = session?.user.token;
+  function getCookie(name: string) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  const token =  getCookie('next-auth.session-token')
 
   const apiFetch = async (
     alert: boolean,
