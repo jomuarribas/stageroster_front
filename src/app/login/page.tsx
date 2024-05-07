@@ -17,9 +17,8 @@ export default function Login() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  const token = session?.user.token;
-  if (status === 'authenticated' && token) {
-    localStorage.setItem('token', token);
+  if (status === 'authenticated') {
+    localStorage.setItem('token', session.user.token);
   }
 
   const {
