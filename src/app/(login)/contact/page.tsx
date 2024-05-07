@@ -19,6 +19,8 @@ export default function Contact() {
     };
     try {
       const fetch = await apiFetch(true, 'POST', route, form, null);
+
+      console.log(fetch);
       if (fetch.message) {
         formRef.current.reset();
       }
@@ -37,11 +39,11 @@ export default function Contact() {
         </p>
         <label>
           Asunto:
-          <input type="text" />
+          <input type="text" required />
         </label>
         <label>
           Mensaje:
-          <textarea />
+          <textarea required />
         </label>
         <button className="button" type="submit">
           Enviar
