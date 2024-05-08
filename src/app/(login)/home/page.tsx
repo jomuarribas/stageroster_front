@@ -3,14 +3,22 @@
 import { useUser } from '@/app/providers/userProvider';
 import styles from './page.module.css';
 import { useApi } from '@/app/hooks/useApi';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
   const formRef = useRef(null);
   const { groups, user, events, setEvents } = useUser();
   const { apiFetch } = useApi();
   const [allEvents, setAllEvents] = useState([]);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      localStorage.setItem('token', session.user.token);
+    }
+  }, [session]);
 
   const addEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
