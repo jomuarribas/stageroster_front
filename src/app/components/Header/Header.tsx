@@ -19,7 +19,7 @@ export default function Header() {
 
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
-    signOut();
+    signOut({ callbackUrl: 'https://stageroster.netlify.app/login' });
     localStorage.removeItem('token');
   };
 
