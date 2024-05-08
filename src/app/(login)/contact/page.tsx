@@ -19,8 +19,6 @@ export default function Contact() {
     };
     try {
       const fetch = await apiFetch(true, 'POST', route, form, null);
-
-      console.log(fetch);
       if (fetch.message) {
         formRef.current.reset();
       }

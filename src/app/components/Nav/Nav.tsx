@@ -12,7 +12,8 @@ const Nav: FC<NavProps> = ({ isOpen, onClose }) => {
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
-    signOut({ callbackUrl: '/login' });
+    signOut();
+    localStorage.removeItem('token');
   };
   return (
     <nav className={`${styles.nav} ${!isOpen ? styles.closeNav : ''}`}>
@@ -39,7 +40,7 @@ const Nav: FC<NavProps> = ({ isOpen, onClose }) => {
         </Link>
       </div>
       <div>
-        <Link href="" onClick={closeSession}>
+        <Link href="/login" onClick={closeSession}>
           Cerrar sesión
           <span className="material-symbols-outlined">logout</span>
         </Link>

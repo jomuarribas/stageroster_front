@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useAlert } from '../providers/AlertContext';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface formDataSend {
   username: string;
@@ -13,9 +14,9 @@ interface formDataSend {
 }
 
 export default function Login() {
+  const { data: session } = useSession();
   const { setErrorMessage } = useAlert();
   const router = useRouter();
-  const { data: session, status } = useSession();
 
   const {
     register,
@@ -30,16 +31,17 @@ export default function Login() {
       redirect: false,
     });
 
-    if (status === 'authenticated' && typeof window !== 'undefined') {
-      localStorage.setItem('token', session.user.token);
+    if (responseNextAuth?.error) {
+      setErrorMessage(responseNextAuth.error);
     }
-
-    if (!responseNextAuth?.error) {
-      router.push('/home');
-      return;
-    }
-    setErrorMessage(responseNextAuth.error);
   };
+
+  useEffect(() => {
+    if (session) {
+      localStorage.setItem('token', session.user.token);
+      router.push('/home');
+    }
+  }, [session, router]);
 
   return (
     <main className={styles.login}>

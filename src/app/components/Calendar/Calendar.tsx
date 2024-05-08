@@ -1,5 +1,5 @@
 // @ts-nocheck
-"use client"
+'use client';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -20,14 +20,15 @@ export default function CalendarComponent() {
       return eventMoment.isSame(clickedMoment, 'day');
     });
     setSelectedEvent(event);
-    console.log(event)
   };
 
   // Filtrar eventos con title "Personal" y status "confirmed"
-  const personalEvents = events.filter(event => event.title === 'Personal');
+  const personalEvents = events.filter((event) => event.title === 'Personal');
 
   // Filtrar eventos con title "Grupal" y status "confirmed"
-  const grupalEvents = events.filter(event => event.title === 'Grupal' && event.status === 'confirmed');
+  const grupalEvents = events.filter(
+    (event) => event.title === 'Grupal' && event.status === 'confirmed',
+  );
 
   // Unir eventos filtrados
   const filteredEvents = [...personalEvents, ...grupalEvents];
@@ -51,7 +52,9 @@ export default function CalendarComponent() {
       return eventMoment.isSame(currentMoment, 'day');
     });
     if (event) {
-      return event.title === 'Personal' ? styles.personalEvent : styles.grupalEvent;
+      return event.title === 'Personal'
+        ? styles.personalEvent
+        : styles.grupalEvent;
     }
     return null;
   };
@@ -67,15 +70,21 @@ export default function CalendarComponent() {
           tileClassName={tileClassName}
         />
       </div>
-      {!selectedEvent ? <p className={styles.noEvent}>No hay ningún evento en esta fecha.</p> : (
+      {!selectedEvent ? (
+        <p className={styles.noEvent}>No hay ningún evento en esta fecha.</p>
+      ) : (
         <div className={styles.eventDetails}>
-          <h3>{selectedEvent.date.split('-').reverse().join('-')} ({selectedEvent.title === "Grupal" ? selectedEvent.extendedProps.groupName : "Personal"})</h3>
+          <h3>
+            {selectedEvent.date.split('-').reverse().join('-')} (
+            {selectedEvent.title === 'Grupal'
+              ? selectedEvent.extendedProps.groupName
+              : 'Personal'}
+            )
+          </h3>
           <p>Ubicacion: {selectedEvent.extendedProps.location}</p>
-            <p>{selectedEvent.extendedProps.description}</p>
+          <p>{selectedEvent.extendedProps.description}</p>
         </div>
       )}
     </div>
   );
 }
-
-

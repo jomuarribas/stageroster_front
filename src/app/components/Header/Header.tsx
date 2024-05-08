@@ -19,7 +19,8 @@ export default function Header() {
 
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
-    signOut({ callbackUrl: '/login' });
+    signOut();
+    localStorage.removeItem('token');
   };
 
   useEffect(() => {
@@ -70,12 +71,14 @@ export default function Header() {
             <Link href="./contact">
               <p>Contacto</p>
             </Link>
-            <span
-              className={`material-symbols-outlined ${styles.logoutIcon}`}
-              onClick={closeSession}
-            >
-              logout
-            </span>
+            <Link href="./login">
+              <span
+                className={`material-symbols-outlined ${styles.logoutIcon}`}
+                onClick={closeSession}
+              >
+                logout
+              </span>
+            </Link>
             <span className="material-symbols-outlined" onClick={handleOpen}>
               menu
             </span>

@@ -9,6 +9,6 @@ export const config = {
       "/user/:path*",
   ],
   pages: {
-      signIn: '/login'
-  }
+      signIn: '/login',
+  },
 }
