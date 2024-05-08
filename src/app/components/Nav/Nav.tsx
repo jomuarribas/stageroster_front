@@ -12,7 +12,7 @@ const Nav: FC<NavProps> = ({ isOpen, onClose }) => {
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
-    signOut({ callbackUrl: 'https://stageroster.netlify.app/login' });
+    signOut();
     localStorage.removeItem('token');
   };
   return (

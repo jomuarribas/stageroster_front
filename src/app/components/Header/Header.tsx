@@ -19,7 +19,7 @@ export default function Header() {
 
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
-    signOut({ callbackUrl: 'https://stageroster.netlify.app/login' });
+    signOut();
     localStorage.removeItem('token');
   };
 
@@ -71,10 +71,9 @@ export default function Header() {
             <Link href="./contact">
               <p>Contacto</p>
             </Link>
-            <Link href="./login">
+            <Link href="./login" onClick={closeSession}>
               <span
                 className={`material-symbols-outlined ${styles.logoutIcon}`}
-                onClick={closeSession}
               >
                 logout
               </span>

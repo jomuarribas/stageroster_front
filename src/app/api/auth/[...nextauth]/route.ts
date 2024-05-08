@@ -33,6 +33,11 @@ const handler = NextAuth({
       
     })
   ],
+  pages: {
+    signIn: "/login",
+    signOut: "/login",
+  },
+  
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };
@@ -41,11 +46,6 @@ const handler = NextAuth({
       session.user = token as any;
       return session;
     },
-  },
-
-  
-  pages: {
-    signIn: "/login",
   },
 });
 
