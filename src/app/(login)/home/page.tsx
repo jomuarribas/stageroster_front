@@ -184,6 +184,7 @@ export default function Home() {
             .filter(
               (event) => event.status === 'pending' && event.title === 'Grupal',
             )
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((event, index) => (
               <div key={index}>
                 <p>
@@ -234,6 +235,7 @@ export default function Home() {
         {events.filter((event) => event.status === 'confirmed').length > 0 ? (
           events
             .filter((event) => event.status === 'confirmed')
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((event, index) => (
               <div key={index}>
                 <p>
@@ -257,6 +259,7 @@ export default function Home() {
         {events.filter((event) => event.status === 'rejected').length > 0 ? (
           events
             .filter((event) => event.status === 'rejected')
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((event, index) => (
               <div key={index}>
                 <p>

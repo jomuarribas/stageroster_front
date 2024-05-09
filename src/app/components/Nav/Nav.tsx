@@ -3,17 +3,21 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import styles from './nav.module.css';
 import { FC } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface NavProps {
   isOpen: boolean;
   onClose: () => void;
 }
 const Nav: FC<NavProps> = ({ isOpen, onClose }) => {
+  const router = useRouter();
+
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
     signOut();
     localStorage.removeItem('token');
+    router.push('/login');
   };
   return (
     <nav className={`${styles.nav} ${!isOpen ? styles.closeNav : ''}`}>

@@ -5,9 +5,11 @@ import Link from 'next/link';
 import Nav from '../Nav/Nav';
 import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleOpen = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ export default function Header() {
     e.preventDefault();
     signOut();
     localStorage.removeItem('token');
+    router.push('/login');
   };
 
   useEffect(() => {
