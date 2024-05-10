@@ -10,11 +10,11 @@
   width: 100%;
   justify-content: center;
   height: 100%;
-  background: rgb(134, 172, 199);
+  background: #a1dcc8;
   background: linear-gradient(
     95deg,
     var(--sr-blue-color-primary) 0%,
-    #86acc77d 50%,
+    #a1dcc8 50%,
     var(--sr-blue-color-primary) 100%
   );
 }

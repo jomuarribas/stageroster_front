@@ -53,13 +53,8 @@
   font-size: 1.25rem;
   margin: 0.5rem 0;
   width: 360px;
-  background: rgb(10, 36, 99);
-  background: linear-gradient(
-    95deg,
-    rgba(10, 36, 99, 0.7189469537815126) 0%,
-    rgba(10, 36, 99, 1) 50%,
-    rgba(10, 36, 99, 0.7245491946778712) 100%
-  );
+  background: #2b232a;
+  background: linear-gradient(95deg, #2b232ab7 0%, #2b232a 50%, #2b232ab7 100%);
 }
 
 .groupIndiv h3 span {

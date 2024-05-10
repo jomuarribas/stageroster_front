@@ -5,12 +5,12 @@
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --sr-primary-color: #fffaff;
-  --sr-secundary-color: #1e1b18ff;
+  --sr-secundary-color: #2b232a;
   --sr-pink-color-primary: #f24e7fff;
   --sr-pink-color-secundary: #fb0056ff;
-  --sr-blue-color-primary: #86acc7;
-  --sr-blue-color-secundary: #0a2463ff;
-  --sr-taupe-gray: #8f8b8cff;
+  --sr-blue-color-primary: #f8d964;
+  --sr-blue-color-secundary: #364741;
+  --sr-taupe-gray: #a1dcc8;
 }
 
 a {

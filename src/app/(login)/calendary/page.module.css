@@ -39,17 +39,11 @@
   padding: 5px;
   border-radius: 0 0 10px 10px;
   margin: 0 auto;
-  background: rgb(134, 172, 199);
-  background: linear-gradient(
-    95deg,
-    var(--sr-blue-color-primary) 0%,
-    #86acc77d 50%,
-    var(--sr-blue-color-primary) 100%
-  );
+  background: #a1dcc8b3;
 }
 
 .toogleCalendary p {
-  color: var(--sr-blue-color-secundary);
+  color: var(--sr-secundary-color);
   transition: 100ms;
   height: 100%;
   animation: toogleCalendary 3s ease-in-out infinite;
