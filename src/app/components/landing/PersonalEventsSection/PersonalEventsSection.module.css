@@ -1,0 +1,30 @@
+.personalEventsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: groupsuto;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.personalEventsSection > div {
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 300;
+  font-size: 17px;
+  text-align: justify;
+  padding: 20px;
+  gap: 10px;
+}
+
+.personalEventsSection > div > h3 {
+  font-size: 30px;
+  text-align: left;
+}
+
+.personalEventsSection > div > h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}

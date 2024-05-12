@@ -1,0 +1,57 @@
+.eventsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 25px auto;
+  border-radius: 40px;
+  background: rgb(248, 216, 100);
+  background: linear-gradient(
+    321deg,
+    rgba(248, 216, 100, 1) 0%,
+    rgba(248, 216, 100, 0.11250437675070024) 100%
+  );
+  box-shadow: 5px 5px 5px #d3b855;
+}
+
+.eventsSection > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+}
+.eventsSection > div > div > h3 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.eventsSection > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 300;
+  font-size: 17px;
+  text-align: justify;
+  padding: 30px;
+  gap: 10px;
+}
+
+.eventsSection > div > div:nth-child(1) {
+  max-width: 400px;
+}
+
+.eventsSection > div > div:nth-child(2) img {
+  align-self: center;
+  width: 200px;
+  height: auto;
+  right: 0;
+}
+
+@media screen and (max-width: 830px) {
+  .eventsSection {
+    flex-direction: column;
+    max-width: 90%;
+  }
+}

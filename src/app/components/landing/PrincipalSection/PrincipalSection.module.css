@@ -1,0 +1,62 @@
+.principalSection {
+  margin: 50px 0 20px 0;
+  background-image: url('/assets/PrincipalSection.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+.principalSection > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.principalSection > div > div:nth-child(1) {
+  display: flex;
+  align-items: flex-start;
+  padding: 30px;
+  font-weight: 500;
+  font-size: 50px;
+  color: var(--sr-primary-color);
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+.principalSection > div > div:nth-child(1) h3 {
+  max-width: 400px;
+}
+
+.principalSection > div > div:nth-child(2) {
+  position: relative;
+  display: flex;
+  padding: 20px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.principalSection > div > div:nth-child(2) img {
+  position: absolute;
+  align-self: center;
+  width: 220px;
+  height: auto;
+  right: 0;
+}
+
+@media screen and (max-width: 830px) {
+  .principalSection > div {
+    flex-direction: column;
+  }
+  .principalSection > div > div:nth-child(1) {
+    font-size: 40px;
+    align-items: center;
+    text-align: center;
+  }
+  .principalSection > div > div:nth-child(2) img {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: auto;
+  }
+}
