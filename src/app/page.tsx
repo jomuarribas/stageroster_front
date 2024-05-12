@@ -1,6 +1,7 @@
 import EventsSection from './components/landing/EventsSecton/EventsSections';
 import Footer from './components/landing/Footer/Footer';
 import FormSection from './components/landing/FormSection/FormSection';
+import GetItOn from './components/landing/GetItOn/GetItOn';
 import GroupsSection from './components/landing/GroupsSection/GroupsSection';
 import Nav_l from './components/landing/Nav/Nav_l';
 import PersonalEventsSection from './components/landing/PersonalEventsSection/PersonalEventsSection';
@@ -13,6 +14,7 @@ export default function StageRosterApp() {
       <Nav_l />
       <main className={styles.landingContent}>
         <PrincipalSection />
+        <GetItOn />
         <GroupsSection />
         <EventsSection />
         <PersonalEventsSection />
