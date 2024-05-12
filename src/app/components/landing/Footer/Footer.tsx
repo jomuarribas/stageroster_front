@@ -10,11 +10,11 @@ export default function Footer() {
         width="30"
         height="30"
         viewBox="0 0 24 24"
-        stroke-width="1.5"
+        strokeWidth={1.5}
         stroke="#2b232a"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />

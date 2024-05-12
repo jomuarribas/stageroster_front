@@ -44,6 +44,7 @@
   border: none;
   background-color: transparent;
   border-bottom: 1px solid var(--sr-primary-color);
+  border-radius: none;
   color: var(--sr-secundary-color);
   width: 250px;
   margin: 10px 0 25px 0;
