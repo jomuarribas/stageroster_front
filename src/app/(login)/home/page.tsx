@@ -51,6 +51,7 @@ export default function Home() {
       if (fetch.message) {
         setEvents((currentEvents) => [...currentEvents, fetch.event]);
         formRef.current.reset();
+        window.scrollTo(0, 0);
       }
     } catch (error) {
       return console.log(error);
