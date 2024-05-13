@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import Image from 'next/image';
 import styles from './Header.module.css';
@@ -6,10 +7,24 @@ import Nav from '../Nav/Nav';
 import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/app/providers/userProvider';
 
 export default function Header() {
+  const [pendingEvents, setPendingEvents] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { events, user } = useUser();
+
+  useEffect(() => {
+    const newPendingEvents = events.filter(
+      (event) =>
+        event.status === 'pending' &&
+        event.title === 'Grupal' &&
+        !event.acceptedBy.some((acceptedUser) => acceptedUser._id === user._id),
+    );
+
+    setPendingEvents(newPendingEvents);
+  }, [events, user]);
 
   const handleOpen = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,6 +65,12 @@ export default function Header() {
               <p>Home</p>
               <span className="material-symbols-outlined">home</span>
             </Link>
+            {pendingEvents.length > 0 && (
+              <div className={styles.pendingEventsNumber}>
+                <p>{pendingEvents.length}</p>
+                <p>EP</p>
+              </div>
+            )}
           </div>
           <div>
             <Image

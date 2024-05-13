@@ -1,0 +1,50 @@
+.pendingEvents {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 350px;
+  height: 100%;
+  padding: 10px;
+  background-color: var(--sr-blue-color-primary);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.6s;
+}
+
+.pendingEvents > span {
+  position: absolute;
+  font-size: 2rem;
+  right: 20px;
+  top: 27px;
+  color: var(--sr-secundary-color);
+  margin-bottom: 10px;
+  animation: click 0.7s infinite;
+}
+
+.pendingEvents a {
+  text-decoration: none;
+}
+
+.pendingEvents a:hover {
+  color: var(--sr-secundary-color);
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes click {
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

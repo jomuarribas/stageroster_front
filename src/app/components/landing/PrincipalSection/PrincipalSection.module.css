@@ -43,6 +43,10 @@
 }
 
 @media screen and (max-width: 830px) {
+  .principalSection {
+    margin: 10px 0 20px 0;
+  }
+
   .principalSection > div {
     flex-direction: column;
   }
@@ -58,6 +62,5 @@
     transform: translate(-50%, -50%);
     width: 220px;
     height: auto;
-    margin: 20px 0 20px 0;
   }
 }
