@@ -1,3 +1,7 @@
+.spaceHeader {
+  height: 50px;
+}
+
 .headerH {
   display: flex;
   flex-direction: column;
