@@ -130,6 +130,7 @@ export default function Home() {
 
   return (
     <>
+      <div className={styles.spaceHeader}></div>
       <PendingEvents
         isOpen={pendingEventsModalOpen}
         onClose={() => setPendingEventsModalOpen(false)}

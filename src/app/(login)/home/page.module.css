@@ -1,3 +1,7 @@
+.spaceHeader {
+  height: 50px;
+}
+
 .home {
   display: flex;
   flex-direction: column;
