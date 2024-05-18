@@ -46,7 +46,7 @@ export default function UserProvider({
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (status === 'authenticated' && session?.user.user._id) {
+    if (status === 'authenticated') {
       const fetchUser = async () => {
         try {
           const userData = await apiFetch(

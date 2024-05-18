@@ -37,7 +37,6 @@ export default function Header() {
   const closeSession = (e: React.MouseEvent) => {
     e.preventDefault();
     signOut();
-    localStorage.removeItem('token');
     router.push('/login');
   };
 

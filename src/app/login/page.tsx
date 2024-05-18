@@ -1,12 +1,10 @@
 'use client';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useAlert } from '../providers/AlertContext';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 interface formDataSend {
   username: string;
@@ -14,9 +12,7 @@ interface formDataSend {
 }
 
 export default function Login() {
-  const { data: session } = useSession();
   const { setErrorMessage } = useAlert();
-  const router = useRouter();
 
   const {
     register,
@@ -35,13 +31,6 @@ export default function Login() {
       setErrorMessage(responseNextAuth.error);
     }
   };
-
-  useEffect(() => {
-    if (session) {
-      localStorage.setItem('token', session.user.token);
-      router.push('/home');
-    }
-  }, [session, router]);
 
   return (
     <main className={styles.login}>

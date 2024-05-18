@@ -1,11 +1,13 @@
 import { useRouter } from 'next/navigation';
 import { useAlert } from '../providers/AlertContext';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export const useApi = () => {
   const router = useRouter();
   const { setSuccessMessage, setErrorMessage, setWarningMessage } = useAlert();
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
   const apiFetch = async (
     alert: boolean,
@@ -30,7 +32,7 @@ export const useApi = () => {
       }
 
       if (localStorage.getItem('token')) {
-        headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+        headers['Authorization'] = `Bearer ${session?.user.token}`;
       }
 
       const requestOptions: RequestInit = {
