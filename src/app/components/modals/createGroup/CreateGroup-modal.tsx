@@ -15,8 +15,9 @@ export default function CreateGroupModal() {
       const timer = setTimeout(() => {
         setShowForm(true);
       }, 3000);
-
       return () => clearTimeout(timer);
+    } else {
+      setShowForm(false);
     }
   }, [groups]);
 

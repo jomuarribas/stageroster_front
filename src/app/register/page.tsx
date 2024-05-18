@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 import { useForm } from 'react-hook-form';
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useApi } from '../hooks/useApi';
@@ -19,7 +19,7 @@ type formDataSend = {
 
 export default function Register() {
   const { apiFetch } = useApi();
-  const recaptcha = useRef()
+  const recaptcha = useRef();
 
   const {
     register,
@@ -30,9 +30,9 @@ export default function Register() {
   const password = watch('password', '');
 
   const submit = async (data: formDataSend) => {
-     const captchaValue = recaptcha.current.getValue()
-     if (!captchaValue) {
-       return
+    const captchaValue = recaptcha.current.getValue();
+    if (!captchaValue) {
+      return;
     }
     const { confirmPassword, ...formDataRest } = data;
     const route = 'users/register';
@@ -66,6 +66,10 @@ export default function Register() {
               id="username"
               {...register('username', {
                 required: 'Debes poner un nombre de usuario',
+                pattern: {
+                  value: /^[a-z0-9]+$/,
+                  message: 'No puede contener mayúsculas ni espacios',
+                },
               })}
               className={formErrors.username ? styles.inputError : ''}
               placeholder='Ejemplo: "Juanito123"'
@@ -133,7 +137,8 @@ export default function Register() {
               {...register('password', {
                 required: 'Debes poner una contraseña',
                 pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/,
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
                   message: '8 Caracteres, 1 mayúscula y 1 minúscula',
                 },
               })}
@@ -163,10 +168,10 @@ export default function Register() {
             )}
           </div>
           <ReCAPTCHA
-              className={styles.reCaptcha}
-              sitekey='6LeJUMspAAAAAEG_ftXLvDNRDpwZ_E4W_c9Y1iOB'
-              ref={recaptcha}
-            />
+            className={styles.reCaptcha}
+            sitekey="6LeJUMspAAAAAEG_ftXLvDNRDpwZ_E4W_c9Y1iOB"
+            ref={recaptcha}
+          />
 
           <button className="emptyButton" type="submit">
             Registrar
