@@ -7,7 +7,15 @@ interface Props {
 }
 
 const SessionAuthProvider = ({ children }: Props) => {
-  const { data: session, status } = useSession();
+  return (
+    <SessionProvider>
+      <SessionHandler>{children}</SessionHandler>
+    </SessionProvider>
+  );
+};
+
+const SessionHandler = ({ children }: Props) => {
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (session) {
@@ -15,7 +23,7 @@ const SessionAuthProvider = ({ children }: Props) => {
     }
   }, [session]);
 
-  return <SessionProvider>{children}</SessionProvider>;
+  return <>{children}</>;
 };
 
 export default SessionAuthProvider;
