@@ -46,6 +46,12 @@ export default function UserProvider({
   const { data: session, status } = useSession();
 
   useEffect(() => {
+    if (session) {
+      localStorage.setItem('token', session.user.token);
+    }
+  }, [session]);
+
+  useEffect(() => {
     if (status === 'authenticated' && session?.user.user._id) {
       const fetchUser = async () => {
         try {
@@ -108,4 +114,3 @@ export default function UserProvider({
 }
 
 export const useUser = () => useContext(UserContext);
-

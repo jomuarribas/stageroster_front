@@ -5,7 +5,6 @@ import styles from './page.module.css';
 import { useApi } from '@/app/hooks/useApi';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
 import PendingEvents from '@/app/components/modals/pendingEvents/pendingEvents';
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
   const formRef = useRef(null);
   const { groups, user, events, setEvents } = useUser();
   const { apiFetch } = useApi();
-  const { data: session } = useSession();
 
   useEffect(() => {
     const hasPendingEvents = events.some(
@@ -25,12 +23,6 @@ export default function Home() {
 
     setPendingEventsModalOpen(hasPendingEvents);
   }, [events, user]);
-
-  useEffect(() => {
-    if (session) {
-      localStorage.setItem('token', session.user.token);
-    }
-  }, [session]);
 
   const addEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
