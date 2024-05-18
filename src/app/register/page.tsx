@@ -137,9 +137,8 @@ export default function Register() {
               {...register('password', {
                 required: 'Debes poner una contraseña',
                 pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
-                  message: '8 Caracteres, 1 mayúscula y 1 minúscula',
+                  value: /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9-_!@#$%^&*]{8,}$/,
+                  message: 'Al menos 8 Caracteres, 1 mayúscula y 1 minúscula',
                 },
               })}
               className={formErrors.password ? styles.inputError : ''}
