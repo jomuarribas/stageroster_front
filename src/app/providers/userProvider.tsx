@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 import React, { createContext, useEffect, useContext, useState } from 'react';
 import { useSession } from 'next-auth/react';
@@ -29,7 +28,7 @@ const UserContext = createContext({
   user: {} as User,
   setUser: (userData: User) => {},
   groups: [] as Group[], // Corregido: especificar el tipo de los elementos del array como Group
-  setGroups: (groupsData: Group[]) => [], // Corregido: especificar el tipo de groupsData como Group[]
+  setGroups: (groupsData: Group[]) => [], // Corregido: especificar el tipo como Group[]
   events: [] as string[], // Corregido: especificar el tipo como string[]
   setEvents: (eventsData: string[]) => [], // Corregido: especificar el tipo como string[]
 });
@@ -40,14 +39,14 @@ export default function UserProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<User>({} as User);
-  const [groups, setGroups] = useState<Group[]>([]); // Corregido: especificar el tipo de groups como Group[]
-  const [events, setEvents] = useState<string[]>([]); // Corregido: especificar el tipo de events como string[]
-  const { apiFetch, loading } = useApi();
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [events, setEvents] = useState<string[]>([]);
+  const { apiFetch } = useApi();
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      const fetchUser = async () => {
+    if (status === 'authenticated' && session?.user?.user?._id) {
+      const fetchData = async () => {
         try {
           const userData = await apiFetch(
             false,
@@ -56,40 +55,29 @@ export default function UserProvider({
             null,
             null,
           );
+
+          const groupsData = await apiFetch(
+            false,
+            'GET',
+            `groups/find/${session.user.user._id}`,
+            null,
+            null,
+          );
+
           setUser(userData);
-
-          const fetchGroups = async () => {
-            try {
-              const groupsData = await apiFetch(
-                false,
-                'GET',
-                `groups/find/${userData._id}`,
-                null,
-                null,
-              );
-              setGroups(groupsData);
-              setEvents([
-                ...userData.mydates,
-                ...groupsData.map((group: Group) => group.events).flat(),
-              ]);
-            } catch (error) {
-              console.error('Error al obtener los grupos:', error);
-            }
-          };
-
-          fetchGroups();
+          setGroups(groupsData);
+          setEvents([
+            ...userData.mydates,
+            ...groupsData.flatMap((group: Group) => group.events),
+          ]);
         } catch (error) {
-          console.error('Error al obtener el usuario:', error);
+          console.error('Error al obtener datos:', error);
         }
       };
 
-      fetchUser();
+      fetchData();
     }
-  }, [session]);
-
-  if (status === 'loading' || loading) {
-    return <Loader />;
-  }
+  }, [status, session]);
 
   return (
     <UserContext.Provider

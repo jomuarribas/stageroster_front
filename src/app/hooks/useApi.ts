@@ -31,9 +31,7 @@ export const useApi = () => {
         }
       }
 
-      if (localStorage.getItem('token')) {
-        headers['Authorization'] = `Bearer ${session?.user.token}`;
-      }
+        headers['Authorization'] = `Bearer ${session?.user.token}`
 
       const requestOptions: RequestInit = {
         method: method,

@@ -5,6 +5,7 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useAlert } from '../providers/AlertContext';
+import { useRouter } from 'next/navigation';
 
 interface formDataSend {
   username: string;
@@ -13,6 +14,7 @@ interface formDataSend {
 
 export default function Login() {
   const { setErrorMessage } = useAlert();
+  const router = useRouter();
 
   const {
     register,
@@ -29,6 +31,8 @@ export default function Login() {
 
     if (responseNextAuth?.error) {
       setErrorMessage(responseNextAuth.error);
+    } else {
+      router.push('/home');
     }
   };
 
