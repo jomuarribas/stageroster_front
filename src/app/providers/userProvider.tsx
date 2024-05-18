@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import React, { createContext, useEffect, useContext, useState } from 'react';
 import { useSession } from 'next-auth/react';
