@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
   .nav {
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
     justify-content: space-between;
     background-color: #333333f6;
     color: #fff;
-    height: 50%;
+    height: 450px;
     width: 230px;
     z-index: 200;
     padding: 20px 0;
