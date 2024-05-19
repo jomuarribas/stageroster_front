@@ -56,7 +56,6 @@ export default function Header() {
 
   return (
     <>
-      <Nav isOpen={isOpen} onClose={handleClose} />
       <header className={styles.headerH}>
         <div className={styles.header}>
           <div>
@@ -106,6 +105,7 @@ export default function Header() {
             </span>
           </div>
         </div>
+        <Nav isOpen={isOpen} onClose={handleClose} />
       </header>
       <div className={styles.spaceHeader}></div>
     </>
