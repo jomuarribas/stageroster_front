@@ -10,6 +10,8 @@ import SuccessMessage from './components/modals/successMessage/successMessage';
 import SessionAuthProvider from './providers/SessionAuthProvider';
 import UserProvider from './providers/userProvider';
 import WarningMessage from './components/modals/warningMessage/warningMessage';
+import Google from 'next-auth/providers/google';
+import GoogleAdsense from './components/GoogleAdsense/GoogleAdsense';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -54,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="es-ES">
       <body id="body" className={inter.className}>
+        <GoogleAdsense />
         <AlertProvider>
           <SessionAuthProvider>
             <UserProvider>
