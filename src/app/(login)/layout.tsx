@@ -6,6 +6,7 @@ import ScrollToTopOnRender from '../utils/ScrollToTopOnRender';
 import CreateGroupModal from '../components/modals/createGroup/CreateGroup-modal';
 import { useSession } from 'next-auth/react';
 import Loader from '../components/Loader/Loader';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -22,7 +23,8 @@ export default function RootLayout({
     return <Loader />;
   }
 
-  if (!session) {
+  if (!session || status === 'authenticated') {
+    signOut();
     router.push('/login');
   }
 
