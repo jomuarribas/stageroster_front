@@ -6,6 +6,7 @@ import ScrollToTopOnRender from '../utils/ScrollToTopOnRender';
 import CreateGroupModal from '../components/modals/createGroup/CreateGroup-modal';
 import { useSession } from 'next-auth/react';
 import Loader from '../components/Loader/Loader';
+import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -14,10 +15,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   if (status === 'loading') {
     return <Loader />;
+  }
+
+  if (!session) {
+    router.push('/login');
   }
 
   if (status === 'authenticated') {
