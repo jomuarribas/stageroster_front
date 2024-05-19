@@ -23,7 +23,7 @@ export default function RootLayout({
     return <Loader />;
   }
 
-  if (!session || status === 'authenticated') {
+  if (!session || status !== 'authenticated') {
     signOut();
     router.push('/login');
   }
