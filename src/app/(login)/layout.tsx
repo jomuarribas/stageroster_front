@@ -39,8 +39,8 @@ export default function RootLayout({
   // }
 
   if (status === 'authenticated') {
-    signOut();
-    router.push('/login');
+    // signOut();
+    // router.push('/login');
     return (
       <>
         <CreateGroupModal />
