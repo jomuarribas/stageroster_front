@@ -95,11 +95,6 @@ export default function User() {
               {user?.email}
             </p>
           </div>
-          <div>
-            <p>
-              <strong>Subscripción: </strong> {user?.subscription}
-            </p>
-          </div>
         </div>
       </section>
     </main>
