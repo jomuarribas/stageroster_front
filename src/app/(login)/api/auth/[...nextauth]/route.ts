@@ -44,6 +44,12 @@ const handler = NextAuth({
     },
     async session({ session, token }) {
       session.user = token as any;
+      const currentDate = new Date();
+    const sessionExpiryDate = new Date(session.expires);
+
+    if (sessionExpiryDate < currentDate) {
+      throw new Error('Session expired');
+    }
       return session;
     },
   },
