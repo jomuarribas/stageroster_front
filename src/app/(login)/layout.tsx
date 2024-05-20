@@ -39,7 +39,7 @@ export default function RootLayout({
   // }
 
   if (status === 'authenticated') {
-    alert(status);
+    alert(session.expires);
     return (
       <>
         <CreateGroupModal />
