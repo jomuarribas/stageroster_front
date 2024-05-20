@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import Loader from '../components/Loader/Loader';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,12 +24,22 @@ export default function RootLayout({
     return <Loader />;
   }
 
-  if (!session || status !== 'authenticated') {
+  if (
+    status !== 'authenticated' ||
+    (session?.expires && new Date(session.expires) < new Date())
+  ) {
     signOut();
     router.push('/login');
   }
 
+  // if (session || status !== 'authenticated') {
+  //   alert(status);
+  //   // signOut();
+  //   // router.push('/login');
+  // }
+
   if (status === 'authenticated') {
+    alert(status);
     return (
       <>
         <CreateGroupModal />
