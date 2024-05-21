@@ -49,6 +49,10 @@ a:hover {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #body {
   background-color: #fffaff;
   background-color: #fffaff;

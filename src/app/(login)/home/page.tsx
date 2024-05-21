@@ -192,8 +192,9 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div id="pendingEvents" className={styles.pendingEvents}></div>
         <div className={styles.grupalDates}>
-          <h3 id="pendingEvents">Eventos pendientes</h3>
+          <h3>Eventos pendientes</h3>
           {events.filter(
             (event) => event.status === 'pending' && event.title === 'Grupal',
           ).length > 0 ? (
