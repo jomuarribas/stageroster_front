@@ -57,9 +57,9 @@
 .loginDiv > form > div > input {
   background-color: transparent;
   border: none;
+  border-radius: 0;
   color: var(--sr-primary-color);
   border-bottom: 1px solid var(--sr-primary-color);
-  border-radius: 0;
   outline: none;
   padding: 5px;
   margin-bottom: 25px;
