@@ -81,7 +81,12 @@ export default function CalendarComponent() {
               : 'Personal'}
             )
           </h3>
-          <p>Ubicacion: {selectedEvent.extendedProps.location}</p>
+          {selectedEvent.time ? (
+            <p className={styles.eventTime}>- Hora: {selectedEvent.time} -</p>
+          ) : null}
+          <p className={styles.ubication}>
+            Ubicacion: {selectedEvent.extendedProps.location}
+          </p>
           <p>{selectedEvent.extendedProps.description}</p>
         </div>
       )}

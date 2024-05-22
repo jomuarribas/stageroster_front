@@ -206,10 +206,11 @@ export default function Home() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div key={index}>
-                  <p>
+                  <strong>
                     {event.date.split('-').reverse().join('-')} (
                     {event.extendedProps.groupName})
-                  </p>
+                  </strong>
+                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
                   <p>
                     {event.extendedProps.eventTitle} en{' '}
                     {event.extendedProps.location}
@@ -263,10 +264,11 @@ export default function Home() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div key={index}>
-                  <p>
+                  <strong>
                     {event.date.split('-').reverse().join('-')} (
                     {event.extendedProps.groupName})
-                  </p>
+                  </strong>
+                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
                   <p>
                     {event.extendedProps.eventTitle} en{' '}
                     {event.extendedProps.location}
@@ -287,10 +289,11 @@ export default function Home() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div key={index}>
-                  <p>
+                  <strong>
                     {event.date.split('-').reverse().join('-')} (
                     {event.extendedProps.groupName})
-                  </p>
+                  </strong>
+                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
                   <p>
                     {event.extendedProps.eventTitle} en{' '}
                     {event.extendedProps.location}

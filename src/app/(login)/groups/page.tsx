@@ -12,7 +12,7 @@ export default function Groups() {
   const [isExitModalOpen, setIsExitModalOpen] = useState(false);
   const [groupToDelete, setGroupToDelete] = useState<string | null>(null);
   const [groupToExit, setGroupToExit] = useState<string | null>(null);
-  const { user, setUser, groups, setGroups } = useUser();
+  const { user, setUser, groups, setGroups, events, setEvents } = useUser();
   const { apiFetch } = useApi();
 
   const copyToClipboard = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,6 +59,7 @@ export default function Groups() {
       const dataGroup = await apiFetch(true, 'POST', route, dataForm, null);
       setGroups([...groups, dataGroup.group]);
       setUser({ ...user, groups: [...user.groups, dataGroup.group] });
+      setEvents([...events, ...dataGroup.group.events]);
     } catch (error) {
       console.error('Error al crear el grupo:', error);
     }

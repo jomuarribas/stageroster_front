@@ -5,7 +5,7 @@
   align-items: center;
   margin-top: 10px;
 }
-.user section:nth-child(1) {
+.user > section:nth-child(1) {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -32,7 +32,7 @@
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.337);
 }
 
-.imageContainer img {
+.imageContainer > img {
   width: 100%;
   height: 100%;
   border-radius: 100%;
@@ -53,7 +53,7 @@
   margin-top: 13px;
 }
 
-.addImage span {
+.addImage > label > span {
   font-size: 15px;
   width: 100%;
   padding-top: 3px;
@@ -74,17 +74,17 @@
   overflow: hidden;
 }
 
-.nameContainer h3 {
+.nameContainer > h3 {
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 20px;
 }
 
-.nameContainer p {
+.nameContainer > p {
   font-size: 13px;
 }
 
-.nameContainer p:nth-of-type(2) {
+.nameContainer > p:nth-of-type(2) {
   color: rgb(180, 1, 1);
 }
 
@@ -98,4 +98,30 @@
   margin-top: 20px;
   font-size: 15px;
   gap: 5px;
+}
+
+.deleteUser {
+  color: var(--sr-primary-color);
+  display: block;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  background-color: var(--sr-secundary-color);
+  font-size: 14px;
+  width: 100%;
+  z-index: 100;
+}
+
+.deleteUser > h3 {
+  margin-top: 10px;
+  color: var(--sr-blue-color-primary);
+}
+
+.deleteUser > p {
+  margin: 10px 0;
+}
+
+.deleteUser > button {
+  width: 120px;
+  margin-bottom: 10px;
 }

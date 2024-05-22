@@ -60,3 +60,11 @@
 .noEvent {
   margin-top: 30px;
 }
+
+.ubication {
+  margin-top: 6px;
+}
+
+.eventTime {
+  font-style: italic;
+}

@@ -1,0 +1,93 @@
+.deleteUserModal {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  backdrop-filter: blur(5px);
+  pointer-events: all;
+  z-index: 1000;
+}
+
+.deleteUserModal > div {
+  position: fixed;
+  display: flex;
+  background-color: var(--sr-secundary-color);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 290px;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.deleteUserModal > div > input::placeholder {
+  color: var(--sr-taupe-gray);
+  font-size: 12px;
+}
+
+.deleteUserModal > div > form > p {
+  text-align: justify;
+  font-size: 14px;
+}
+
+.deleteUserModal > div > form > label {
+  margin-top: 15px;
+}
+
+.deleteUserModal > div > form {
+  color: var(--sr-primary-color);
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+  gap: 12px;
+  padding: 20px;
+}
+.deleteUserModal > div > form > div {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.deleteUserModal > div > form > div > button:last-child {
+  width: 120px;
+}
+
+.deleteUserModal div input {
+  margin-bottom: 10px;
+  color: var(--sr-primary-color) !important;
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--sr-primary-color);
+  color: var(--sr-secundary-color);
+}
+
+.deleteUserModal > div h3 {
+  color: var(--sr-blue-color-primary);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.deleteUserModal > div button {
+  align-self: center;
+  background-color: transparent;
+  border: 1px solid var(--sr-blue-color-primary);
+  color: var(--sr-blue-color-primary);
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  transition: 100ms;
+}
+
+.deleteUserModal > div button:hover {
+  background-color: var(--sr-blue-color-primary);
+  color: var(--sr-secundary-color);
+}

@@ -18,8 +18,8 @@ export default function Header() {
   useEffect(() => {
     const newPendingEvents = events.filter(
       (event) =>
-        event.status === 'pending' &&
-        event.title === 'Grupal' &&
+        event?.status === 'pending' &&
+        event?.title === 'Grupal' &&
         !event.acceptedBy.some((acceptedUser) => acceptedUser._id === user._id),
     );
 

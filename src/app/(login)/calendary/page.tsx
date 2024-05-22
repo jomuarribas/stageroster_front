@@ -115,10 +115,11 @@ export default function Calendary() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div key={index}>
-                  <p>
+                  <strong>
                     {event.date.split('-').reverse().join('-')} (
                     {event.extendedProps.groupName})
-                  </p>
+                  </strong>
+                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
                   <p>
                     {event.extendedProps.eventTitle} en{' '}
                     {event.extendedProps.location}
@@ -141,7 +142,7 @@ export default function Calendary() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div key={index}>
-                  <p>{event.date.split('-').reverse().join('-')}</p>
+                  <strong>{event.date.split('-').reverse().join('-')}</strong>
                   <p>
                     {event.extendedProps.eventTitle} en{' '}
                     {event.extendedProps.location}

@@ -6,7 +6,7 @@ import { useApi } from '@/app/hooks/useApi';
 import { useEffect, useState } from 'react';
 
 export default function CreateGroupModal() {
-  const { user, setUser, groups, setGroups } = useUser();
+  const { user, setUser, groups, setGroups, events, setEvents } = useUser();
   const { apiFetch } = useApi();
   const [showForm, setShowForm] = useState(false);
 
@@ -49,9 +49,12 @@ export default function CreateGroupModal() {
 
     try {
       const dataGroup = await apiFetch(true, 'POST', route, dataForm, null);
-      setGroups([...groups, dataGroup.group]);
-      setUser({ ...user, groups: [...user.groups, dataGroup.group] });
-      setShowForm(false);
+      if (dataGroup) {
+        setGroups([...groups, dataGroup.group]);
+        setUser({ ...user, groups: [...user.groups, dataGroup.group] });
+        setEvents([...dataGroup.group.events]);
+        setShowForm(false);
+      }
     } catch (error) {
       console.error('Error al crear el grupo:', error);
     }

@@ -217,3 +217,8 @@
   font-size: 16px;
   font-weight: 300;
 }
+
+.eventTime {
+  margin-bottom: 7px;
+  font-style: italic;
+}
