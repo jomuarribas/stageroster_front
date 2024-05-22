@@ -125,8 +125,3 @@
   width: 120px;
   margin-bottom: 18px;
 }
-
-.deleteUser > input {
-  border: none;
-  border-radius: 0;
-}

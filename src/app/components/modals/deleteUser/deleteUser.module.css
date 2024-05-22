@@ -63,6 +63,7 @@
   padding: 5px;
   outline: none;
   border: none;
+  border-radius: 0;
   background-color: transparent;
   border-bottom: 1px solid var(--sr-primary-color);
   color: var(--sr-secundary-color);
