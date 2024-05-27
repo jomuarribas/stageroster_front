@@ -207,6 +207,10 @@
   width: 100%;
 }
 
+.card:not(.flipped) .cardFaceBack {
+  pointer-events: none;
+}
+
 .card {
   position: relative;
   width: 170px;
@@ -253,7 +257,6 @@
     rgba(255, 255, 255, 1) 100%
   );
   box-shadow: 2px 2px 2px #00000023;
-  pointer-events: none;
 }
 
 .cardFaceBack {
