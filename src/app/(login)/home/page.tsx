@@ -74,7 +74,7 @@ export default function Home() {
       null,
     );
     if (data.message) {
-      setEvents(events.filter((e) => e.date !== event.date));
+      setEvents(events.filter((e) => e.date !== date.date));
     }
   };
 
@@ -353,7 +353,7 @@ export default function Home() {
                           e.stopPropagation();
                           e.preventDefault();
                           setDisappearing(index);
-                          setTimeout(() => deleteGroupEvent(event), 1000);
+                          setTimeout(() => deleteGroupEvent(event), 800);
                         }}
                       >
                         Eliminar
