@@ -8,6 +8,8 @@ import Image from 'next/image';
 import PendingEvents from '@/app/components/modals/pendingEvents/pendingEvents';
 
 export default function Home() {
+  const [disappearing, setDisappearing] = useState(null);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [pendingEventsModalOpen, setPendingEventsModalOpen] = useState(false);
   const formRef = useRef(null);
   const { groups, user, events, setEvents } = useUser();
@@ -23,6 +25,17 @@ export default function Home() {
 
     setPendingEventsModalOpen(hasPendingEvents);
   }, [events, user]);
+
+  const handleScroll = () => {
+    setIsFlipped(null);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const addEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,37 +63,31 @@ export default function Home() {
     }
   };
 
-  const deleteGroupEvent = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const name = e.target.parentElement.children[0].innerText;
-    const match = name.match(/\(([^)]+)\)/);
-    const date = name.replace(/\([^)]*\)/g, '').trim();
-    const reverseDate = {
-      date: date.split('-').reverse().join('-'),
-    };
-    await apiFetch(
+  const deleteGroupEvent = async (event) => {
+    const name = event.extendedProps.groupName;
+    const date = { date: event.date };
+    const data = await apiFetch(
       true,
       'DELETE',
-      `groups/deleteevent/${match[1]}`,
-      reverseDate,
+      `groups/deleteevent/${name}`,
+      date,
       null,
     );
-    setEvents(events.filter((event) => event.date !== reverseDate.date));
+    if (data.message) {
+      setEvents(events.filter((e) => e.date !== event.date));
+    }
   };
 
-  const confirmGroupEvent = async (e: React.FormEvent<HTMLFormElement>) => {
-    const name = e.target.parentElement.parentElement.children[0].innerText;
-    const match = name.match(/\(([^)]+)\)/);
-    const date = name.replace(/\([^)]*\)/g, '').trim();
+  const confirmGroupEvent = async (event) => {
     const data = {
-      date: date.split('-').reverse().join('-'),
+      date: event.date,
       accept: true,
       userId: user._id,
     };
     const response = await apiFetch(
       true,
       'PUT',
-      `groups/updateevent/${match[1]}`,
+      `groups/updateevent/${event.extendedProps.groupName}`,
       data,
       null,
     );
@@ -101,19 +108,21 @@ export default function Home() {
     }
   };
 
-  const rejectGroupEvent = async (e: React.FormEvent<HTMLFormElement>) => {
-    const name = e.target.parentElement.parentElement.children[0].innerText;
-    const match = name.match(/\(([^)]+)\)/);
-    const date = name.replace(/\([^)]*\)/g, '').trim();
+  const rejectGroupEvent = async (event) => {
+    const name = event.extendedProps.groupName;
     const data = {
-      date: date.split('-').reverse().join('-'),
+      date: event.date,
       reject: true,
     };
-    await apiFetch(true, 'PUT', `groups/updateevent/${match[1]}`, data, null);
+    await apiFetch(true, 'PUT', `groups/updateevent/${name}`, data, null);
+    setIsFlipped(false);
     setEvents((currentEvents) => {
       return currentEvents.map((event) => {
         if (event.date === data.date) {
-          event.status = 'rejected';
+          return {
+            ...event,
+            status: 'rejected',
+          };
         }
         return event;
       });
@@ -190,10 +199,14 @@ export default function Home() {
               miembros del grupo el evento pasa automaticamente a la lista de
               confirmados.
             </p>
+            <strong>
+              ¡HAZ CLICK EN CUALQUIER EVENTO PARA VER MÁS DETALLES O
+              ELIMINARLO.!
+            </strong>
           </div>
         </div>
         <div id="pendingEvents" className={styles.pendingEvents}></div>
-        <div className={styles.grupalDates}>
+        <div className={styles.grupalDates01}>
           <h3>Eventos pendientes</h3>
           {events.filter(
             (event) => event.status === 'pending' && event.title === 'Grupal',
@@ -218,8 +231,39 @@ export default function Home() {
                   <div className={styles.pendingButtons}>
                     {!event.acceptedBy.some(
                       (acceptedUser) => acceptedUser._id === user._id,
-                    ) && <button onClick={confirmGroupEvent}>Confirmar</button>}
-                    <button onClick={rejectGroupEvent}>Rechazar</button>
+                    ) && (
+                      <>
+                        <button
+                          className="emptyButton"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            deleteGroupEvent(event);
+                          }}
+                        >
+                          Eliminar
+                        </button>
+
+                        <button
+                          className="emptyButton"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            rejectGroupEvent(event);
+                          }}
+                        >
+                          Rechazar
+                        </button>
+
+                        <button
+                          className="emptyButton"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            confirmGroupEvent(event);
+                          }}
+                        >
+                          Confirmar
+                        </button>
+                      </>
+                    )}
                   </div>
                   <div className={styles.confirmedUser}>
                     <p>Usuarios que han confirmado:</p>
@@ -239,7 +283,7 @@ export default function Home() {
                       ) : (
                         <p
                           style={{
-                            color: 'red',
+                            color: 'brown',
                             fontSize: '13px',
                             marginBottom: '10px',
                           }}
@@ -256,24 +300,66 @@ export default function Home() {
           )}
         </div>
 
-        <div className={styles.grupalDates}>
+        <div className={styles.grupalDates02}>
           <h3>Eventos confirmados</h3>
           {events.filter((event) => event.status === 'confirmed').length > 0 ? (
             events
               .filter((event) => event.status === 'confirmed')
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
-                <div key={index}>
-                  <strong>
-                    {event.date.split('-').reverse().join('-')} (
-                    {event.extendedProps.groupName})
-                  </strong>
-                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
-                  <p>
-                    {event.extendedProps.eventTitle} en{' '}
-                    {event.extendedProps.location}
-                  </p>
-                  <button onClick={deleteGroupEvent}>Eliminar</button>
+                <div
+                  className={`${styles.card} ${isFlipped === index ? styles.flipped : ''} ${disappearing === index ? styles.disappearing : ''}`}
+                  onClick={() => setIsFlipped(index)}
+                  key={index}
+                >
+                  <div className={styles.cardInner}>
+                    <div
+                      className={`${styles.cardFace} ${styles.cardFaceFront}`}
+                      onClick={() => setIsFlipped(!isFlipped)}
+                    >
+                      <span className="material-symbols-outlined">
+                        touch_app
+                      </span>
+                      <strong>
+                        {event.date.split('-').reverse().join('-')}
+                      </strong>
+                      <strong>{event.extendedProps.groupName}</strong>
+                      <p className={styles.eventTime}>
+                        <span className="material-symbols-outlined">
+                          schedule
+                        </span>{' '}
+                        {event.time}
+                      </p>
+                      <p>{event.extendedProps.eventTitle}</p>
+                      <p> {event.extendedProps.location}</p>
+                    </div>
+                    <div className={styles.cardFaceBack}>
+                      <button className={`emptyButton ${styles.detailButton}`}>
+                        Detalles
+                      </button>
+                      <button
+                        className="emptyButton"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          rejectGroupEvent(event);
+                        }}
+                      >
+                        Rechazar
+                      </button>
+                      <button
+                        className="emptyButton"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          setDisappearing(index);
+                          setTimeout(() => deleteGroupEvent(event), 1000);
+                        }}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))
           ) : (
@@ -281,24 +367,53 @@ export default function Home() {
           )}
         </div>
 
-        <div className={styles.grupalDates}>
+        <div className={styles.grupalDates03}>
           <h3>Eventos rechazados</h3>
           {events.filter((event) => event.status === 'rejected').length > 0 ? (
             events
               .filter((event) => event.status === 'rejected')
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
-                <div key={index}>
-                  <strong>
-                    {event.date.split('-').reverse().join('-')} (
-                    {event.extendedProps.groupName})
-                  </strong>
-                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
-                  <p>
-                    {event.extendedProps.eventTitle} en{' '}
-                    {event.extendedProps.location}
-                  </p>
-                  <button onClick={deleteGroupEvent}>Eliminar</button>
+                <div
+                  className={`${styles.card} ${isFlipped === index ? styles.flipped : ''} ${disappearing === index ? styles.disappearing : ''}`}
+                  onClick={() => setIsFlipped(index)}
+                  key={index}
+                >
+                  <div className={styles.cardInner}>
+                    <div
+                      className={`${styles.cardFace} ${styles.cardFaceFront}`}
+                      onClick={() => setIsFlipped(!isFlipped)}
+                    >
+                      <strong>
+                        {event.date.split('-').reverse().join('-')}
+                      </strong>
+                      <strong>{event.extendedProps.groupName}</strong>
+                      <p className={styles.eventTime}>
+                        <span className="material-symbols-outlined">
+                          schedule
+                        </span>{' '}
+                        {event.time}
+                      </p>
+                      <p>{event.extendedProps.eventTitle}</p>
+                      <p> {event.extendedProps.location}</p>
+                    </div>
+                    <div className={styles.cardFaceBack}>
+                      <button className={`emptyButton ${styles.detailButton}`}>
+                        Detalles
+                      </button>
+                      <button
+                        className="emptyButton"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          setDisappearing(index);
+                          setTimeout(() => deleteGroupEvent(event), 1000);
+                        }}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))
           ) : (

@@ -155,15 +155,33 @@
   transform: scale(0.9);
 }
 
-.grupalDates {
+.grupalDates01 > div {
+  width: 350px;
   display: flex;
+  text-align: center;
   flex-direction: column;
-  justify-content: center;
+  gap: 10px;
+  justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgb(248, 217, 100);
+  background: rgb(255, 237, 168);
+  background: linear-gradient(
+    318deg,
+    rgba(242, 78, 127, 0.382) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  box-shadow: 2px 2px 2px #00000023;
 }
 
-.grupalDates > h3 {
+.grupalDates03 {
+  margin-bottom: 20px;
+}
+
+.grupalDates01 > h3,
+.grupalDates02 > h3,
+.grupalDates03 > h3 {
   width: 100%;
   text-align: center;
   padding: 5px;
@@ -178,40 +196,134 @@
   );
 }
 
-.grupalDates > div {
+.grupalDates01,
+.grupalDates02,
+.grupalDates03 {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 15px 10px 0 10px;
-  border-top: 1px solid var(--sr-blue-color-secundary);
 }
 
-.grupalDates > div:first-of-type {
-  border-top: none !important;
-  padding-top: 0;
-}
-
-.grupalDates > div button {
-  background-color: transparent;
-  border: 1px solid var(--sr-blue-color-secundary);
-  color: var(--sr-blue-color-secundary);
-  outline: none;
+.card {
+  position: relative;
+  width: 170px;
+  height: 230px;
+  perspective: 1000px;
   cursor: pointer;
-  border-radius: 10px;
-  width: 100px;
-  height: 30px;
-  transition: 100ms;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  transform: scale(0.9);
 }
 
-.grupalDates > div > .pendingButtons {
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .cardInner {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.cardFaceFront {
+  z-index: 2;
   display: flex;
-  flex-direction: row;
+  text-align: center;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 35px 10px 0 10px;
+  border-radius: 20px;
+  background: rgb(248, 217, 100);
+  background: rgb(255, 237, 168);
+  background: linear-gradient(
+    318deg,
+    rgba(255, 237, 168, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  box-shadow: 2px 2px 2px #00000023;
+}
+
+.cardFaceBack {
+  box-shadow: 2px 2px 2px #00000023;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  gap: 20px;
   justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  transform: rotateY(180deg);
+  background: rgb(248, 217, 100);
+  background: rgb(255, 237, 168);
+  background: linear-gradient(
+    318deg,
+    var(--sr-secundary-color) 50%,
+    #2b232a97 100%
+  );
+}
+
+.cardFaceFront > strong:nth-child(3) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sr-primary-color);
+  background-color: #2b232aa3;
+  border-radius: 5px;
+  width: 117%;
+  height: 25px;
+}
+
+.cardFaceFront > span {
+  display: block;
+  position: absolute;
+  color: var(--sr-secundary-color);
+  filter: opacity(0.3);
+  top: 20px;
+  left: 0;
+  font-size: 30px;
+  animation: click 0.7s infinite;
+}
+
+@keyframes click {
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.detailButton {
+  color: var(--sr-blue-color-primary);
+  border-color: var(--sr-blue-color-primary);
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.card.disappearing {
+  animation: fadeOut 1s forwards;
 }
 
 .confirmedUser > p {
@@ -252,7 +364,42 @@
   height: 35px;
 }
 
+.pendingButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pendingButtons > button {
+  color: var(--sr-secundary-color);
+  border-color: var(--sr-secundary-color);
+  transform: scale(0.9);
+}
+
+.pendingButtons > button:last-child {
+  background-color: var(--sr-secundary-color);
+  border-color: var(--sr-primary-color);
+  color: var(--sr-primary-color);
+}
+
+.pendingButtons > button:last-child:hover {
+  background-color: var(--sr-primary-color);
+  border-color: var(--sr-secundary-color);
+  color: var(--sr-secundary-color);
+}
+
 .eventTime {
   margin-bottom: 7px;
   font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eventTime > span {
+  color: #2b232a8e;
+}
+.eventTime > span:hover {
+  cursor: default;
 }
