@@ -74,7 +74,9 @@ export default function Home() {
       null,
     );
     if (data.message) {
+      setIsFlipped(false);
       setEvents(events.filter((e) => e.date !== date.date));
+      setDisappearing(null);
     }
   };
 
