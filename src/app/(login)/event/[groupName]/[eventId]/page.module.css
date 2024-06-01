@@ -55,6 +55,7 @@
 .event > form > div > input {
   border: none;
   width: 100%;
+  border-radius: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.222);
   font-size: 16px;
   outline: none;
