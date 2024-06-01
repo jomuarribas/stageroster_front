@@ -1,0 +1,110 @@
+.event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.event > h2 {
+  background: rgb(242, 78, 127);
+  background: linear-gradient(
+    315deg,
+    rgba(242, 78, 127, 1) 20%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.event > h3 {
+  background-color: var(--sr-blue-color-secundary);
+  color: var(--sr-primary-color);
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.event > form {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 20px 20px 20px;
+}
+
+.event > form input[type='time'] {
+  display: flex;
+  width: 80px;
+}
+
+.event > form input:nth-child(1) {
+  text-align: center;
+  font-size: 20px;
+}
+
+.event > form > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 25px;
+}
+
+.event > form > div > input {
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.222);
+  font-size: 16px;
+  outline: none;
+  padding: 0 3px;
+  background-color: transparent;
+}
+
+.event > form > input {
+  color: var(--sr-blue-color-secundary);
+  border: 1px solid var(--sr-blue-color-secundary);
+}
+
+.event .textareaForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.event .textareaForm > textarea {
+  display: flex;
+  align-self: flex-start;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  height: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.222);
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.event .currency > input {
+  outline: none;
+  font-size: 17px;
+  width: 60px;
+  text-align: end;
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
+.event .currency > input::-webkit-outer-spin-button,
+.event .currency > input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.event .currency > select {
+  border: none;
+  font-size: 16px;
+}

@@ -82,32 +82,54 @@
   display: none;
 }
 
-.grupalDates {
+.grupalDates,
+.personalDates {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.grupalDates > div {
+  background: rgb(248, 217, 100);
+  background: rgb(255, 237, 168);
+  background: linear-gradient(
+    318deg,
+    rgba(242, 78, 127, 0.5) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  box-shadow: 2px 2px 2px #00000023;
+  height: 200px;
+}
+
+.personalDates > div {
+  background: rgb(248, 217, 100);
+  background: rgb(255, 237, 168);
+  background: linear-gradient(
+    318deg,
+    rgba(90, 181, 149, 0.5) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  box-shadow: 2px 2px 2px #00000023;
+  height: 130px;
+}
+
+.grupalDates > div,
+.personalDates > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  width: 350px;
 }
 
-.grupalDates div,
-.personalDates div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 10px 10px 20px 10px;
-  border-top: 1px solid var(--sr-blue-color-secundary);
-}
-
-.grupalDates div:first-of-type,
-.personalDates div:first-of-type {
-  border-top: none !important;
-}
-
-.grupalDates div button,
-.personalDates div button {
+.grupalDates > div > div > button,
+.grupalDates > div > div > a button,
+.personalDates > div > div > button {
   background-color: transparent;
   border: 1px solid var(--sr-blue-color-secundary);
   color: var(--sr-blue-color-secundary);
@@ -117,8 +139,15 @@
   width: 100px;
   height: 30px;
   transition: 100ms;
-  margin-top: 10px;
+  margin-top: 15px;
   transform: scale(0.9);
+}
+
+.grupalDates > div > div > button:hover,
+.grupalDates > div > div > a button:hover,
+.personalDates > div > div > button:hover {
+  color: var(--sr-primary-color);
+  background-color: var(--sr-secundary-color);
 }
 
 .grupalDates h3,
@@ -219,6 +248,17 @@
 }
 
 .eventTime {
+  margin-top: 5px;
   margin-bottom: 7px;
   font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eventTime > span {
+  color: #2b232a8e;
+}
+.eventTime > span:hover {
+  cursor: default;
 }

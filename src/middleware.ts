@@ -7,6 +7,7 @@ export const config = {
       "/groups/:path*",
       "/home/:path*",
       "/user/:path*",
+      "/event/:path*",
   ],
   pages: {
       signIn: '/login',

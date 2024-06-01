@@ -169,7 +169,7 @@
   background: rgb(255, 237, 168);
   background: linear-gradient(
     318deg,
-    rgba(242, 78, 127, 0.382) 50%,
+    rgba(242, 78, 127, 0.5) 50%,
     rgba(255, 255, 255, 1) 100%
   );
   box-shadow: 2px 2px 2px #00000023;
@@ -381,16 +381,17 @@
   transform: scale(0.9);
 }
 
-.pendingButtons > button:last-child {
+.pendingButtons > button:hover,
+.pendingButtons > button:last-child:hover {
   background-color: var(--sr-secundary-color);
-  border-color: var(--sr-primary-color);
   color: var(--sr-primary-color);
+  border-color: var(--sr-secundary-color);
+  transform: scale(0.9);
 }
 
-.pendingButtons > button:last-child:hover {
-  background-color: var(--sr-primary-color);
-  border-color: var(--sr-secundary-color);
-  color: var(--sr-secundary-color);
+.pendingButtons > button:last-child {
+  background-color: #2b232a8d;
+  color: var(--sr-primary-color);
 }
 
 .eventTime {

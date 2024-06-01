@@ -11,7 +11,7 @@ export default function CreateGroupModal() {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    if (groups.length === 0 && groups !== undefined) {
+    if (groups?.length === 0 && groups !== undefined) {
       const timer = setTimeout(() => {
         setShowForm(true);
       }, 3000);

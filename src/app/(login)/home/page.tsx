@@ -6,14 +6,25 @@ import { useApi } from '@/app/hooks/useApi';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import PendingEvents from '@/app/components/modals/pendingEvents/pendingEvents';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import ConfirmationMessage from '@/app/components/modals/confirmationMessage/confirmationMessage';
 
 export default function Home() {
-  const [disappearing, setDisappearing] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [groupEventToDelete, setGroupEventToDelete] = useState<object | null>(
+    null,
+  );
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
+  const [groupEventToReject, setGroupEventToReject] = useState<object | null>(
+    null,
+  );
   const [isFlipped, setIsFlipped] = useState(false);
   const [pendingEventsModalOpen, setPendingEventsModalOpen] = useState(false);
   const formRef = useRef(null);
   const { groups, user, events, setEvents } = useUser();
   const { apiFetch } = useApi();
+  const router = useRouter();
 
   useEffect(() => {
     const hasPendingEvents = events.some(
@@ -63,21 +74,9 @@ export default function Home() {
     }
   };
 
-  const deleteGroupEvent = async (event) => {
-    const name = event.extendedProps.groupName;
-    const date = { date: event.date };
-    const data = await apiFetch(
-      true,
-      'DELETE',
-      `groups/deleteevent/${name}`,
-      date,
-      null,
-    );
-    if (data.message) {
-      setIsFlipped(false);
-      setEvents(events.filter((e) => e.date !== date.date));
-      setDisappearing(null);
-    }
+  const deleteGroupEvent = async (event: object) => {
+    setIsDeleteModalOpen(true);
+    setGroupEventToDelete(event);
   };
 
   const confirmGroupEvent = async (event) => {
@@ -111,28 +110,70 @@ export default function Home() {
   };
 
   const rejectGroupEvent = async (event) => {
-    const name = event.extendedProps.groupName;
-    const data = {
-      date: event.date,
-      reject: true,
-    };
-    await apiFetch(true, 'PUT', `groups/updateevent/${name}`, data, null);
-    setIsFlipped(false);
-    setEvents((currentEvents) => {
-      return currentEvents.map((event) => {
-        if (event.date === data.date) {
-          return {
-            ...event,
-            status: 'rejected',
-          };
-        }
-        return event;
-      });
-    });
+    setIsRejectModalOpen(true);
+    setGroupEventToReject(event);
   };
 
   return (
     <>
+      <ConfirmationMessage
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        message="¿Estás seguro de que quieres eliminar este evento?"
+        onConfirm={async () => {
+          const name = groupEventToDelete.extendedProps.groupName;
+          const date = { date: groupEventToDelete.date };
+
+          try {
+            const data = await apiFetch(
+              true,
+              'DELETE',
+              `groups/deleteevent/${name}`,
+              date,
+              null,
+            );
+            if (data.message) {
+              setIsFlipped(false);
+              setEvents(events.filter((e) => e.date !== date.date));
+            }
+          } catch (error) {
+            console.error('Error al eliminar el evento:', error);
+          }
+          setIsDeleteModalOpen(false);
+        }}
+      />
+      <ConfirmationMessage
+        isOpen={isRejectModalOpen}
+        onClose={() => setIsRejectModalOpen(false)}
+        message="¿Estás seguro de que quieres rechazar este evento?"
+        onConfirm={async () => {
+          const name = groupEventToReject.extendedProps.groupName;
+          const dataEvent = {
+            date: groupEventToReject.date,
+            reject: true,
+          };
+          await apiFetch(
+            true,
+            'PUT',
+            `groups/updateevent/${name}`,
+            dataEvent,
+            null,
+          );
+          setIsFlipped(false);
+          setEvents((currentEvents) => {
+            return currentEvents.map((event) => {
+              if (groupEventToReject.date === event.date) {
+                return {
+                  ...event,
+                  status: 'rejected',
+                };
+              }
+              return event;
+            });
+          });
+          setIsRejectModalOpen(false);
+        }}
+      />
       <PendingEvents
         isOpen={pendingEventsModalOpen}
         onClose={() => setPendingEventsModalOpen(false)}
@@ -146,7 +187,7 @@ export default function Home() {
             </label>
             <select name="group" id="group">
               <option value="-">-</option>
-              {groups.map((group) => (
+              {groups?.map((group) => (
                 <option
                   key={group._id}
                   value={group.name}
@@ -157,7 +198,7 @@ export default function Home() {
                 </option>
               ))}
             </select>
-            <label htmlFor="name">Nombre del evento</label>
+            <label htmlFor="name">Nombre del evento:</label>
             <input
               type="text"
               id="name"
@@ -165,7 +206,7 @@ export default function Home() {
               placeholder="Nombre"
               required
             />
-            <label htmlFor="description">Descripción</label>
+            <label htmlFor="description">Descripción:</label>
             <input
               type="text"
               id="description"
@@ -173,7 +214,7 @@ export default function Home() {
               name="description"
               required
             />
-            <label htmlFor="location">Ubicación</label>
+            <label htmlFor="location">Población:</label>
             <input
               type="text"
               id="location"
@@ -181,9 +222,9 @@ export default function Home() {
               placeholder="Donde se llevará a cabo el evento"
               required
             />
-            <label htmlFor="date">Fecha</label>
+            <label htmlFor="date">Fecha:</label>
             <input type="date" id="date" name="date" required />
-            <label htmlFor="time">Hora de comienzo</label>
+            <label htmlFor="time">Hora de comienzo:</label>
             <input type="time" id="time" name="time" required />
             <button type="submit">Crear evento</button>
           </form>
@@ -225,7 +266,10 @@ export default function Home() {
                     {event.date.split('-').reverse().join('-')} (
                     {event.extendedProps.groupName})
                   </strong>
-                  <p className={styles.eventTime}>- Hora: {event.time} -</p>
+                  <p className={styles.eventTime}>
+                    <span className="material-symbols-outlined">schedule</span>{' '}
+                    {event.time}
+                  </p>
                   <p>
                     {event.extendedProps.eventTitle} en{' '}
                     {event.extendedProps.location}
@@ -310,7 +354,7 @@ export default function Home() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div
-                  className={`${styles.card} ${isFlipped === index ? styles.flipped : ''} ${disappearing === index ? styles.disappearing : ''}`}
+                  className={`${styles.card} ${isFlipped === index ? styles.flipped : ''}`}
                   onClick={() => setIsFlipped(index)}
                   key={index}
                 >
@@ -336,9 +380,15 @@ export default function Home() {
                       <p> {event.extendedProps.location}</p>
                     </div>
                     <div className={styles.cardFaceBack}>
-                      <button className={`emptyButton ${styles.detailButton}`}>
-                        Detalles
-                      </button>
+                      <Link
+                        href={`/event/${event.extendedProps.groupName}/${event._id}`}
+                      >
+                        <button
+                          className={`emptyButton ${styles.detailButton}`}
+                        >
+                          Detalles
+                        </button>
+                      </Link>
                       <button
                         className="emptyButton"
                         onClick={(e) => {
@@ -354,8 +404,7 @@ export default function Home() {
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
-                          setDisappearing(index);
-                          setTimeout(() => deleteGroupEvent(event), 800);
+                          deleteGroupEvent(event);
                         }}
                       >
                         Eliminar
@@ -377,7 +426,7 @@ export default function Home() {
               .sort((a, b) => new Date(a.date) - new Date(b.date))
               .map((event, index) => (
                 <div
-                  className={`${styles.card} ${isFlipped === index ? styles.flipped : ''} ${disappearing === index ? styles.disappearing : ''}`}
+                  className={`${styles.card} ${isFlipped === index ? styles.flipped : ''}`}
                   onClick={() => setIsFlipped(index)}
                   key={index}
                 >
@@ -400,16 +449,21 @@ export default function Home() {
                       <p> {event.extendedProps.location}</p>
                     </div>
                     <div className={styles.cardFaceBack}>
-                      <button className={`emptyButton ${styles.detailButton}`}>
-                        Detalles
-                      </button>
+                      <Link
+                        href={`/event/${event.extendedProps.groupName}/${event._id}`}
+                      >
+                        <button
+                          className={`emptyButton ${styles.detailButton}`}
+                        >
+                          Detalles
+                        </button>
+                      </Link>
                       <button
                         className="emptyButton"
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
-                          setDisappearing(index);
-                          setTimeout(() => deleteGroupEvent(event), 1000);
+                          deleteGroupEvent(event);
                         }}
                       >
                         Eliminar

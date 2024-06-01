@@ -59,7 +59,7 @@ export default function Header() {
       <header className={styles.headerH}>
         <div className={styles.header}>
           <div>
-            <Link href="./home">
+            <Link href="/home">
               <p>Home</p>
               <span className="material-symbols-outlined">home</span>
             </Link>
@@ -81,19 +81,19 @@ export default function Header() {
             <h1>Stage Roster</h1>
           </div>
           <div>
-            <Link href="./groups">
+            <Link href="/groups">
               <p>Grupos</p>
             </Link>
-            <Link href="./calendary">
+            <Link href="/calendary">
               <p>Calendario</p>
             </Link>
-            <Link href="./user">
+            <Link href="/user">
               <p>Usuario</p>
             </Link>
-            <Link href="./contact">
+            <Link href="/contact">
               <p>Contacto</p>
             </Link>
-            <Link href="./login" onClick={closeSession}>
+            <Link href="/login" onClick={closeSession}>
               <span
                 className={`material-symbols-outlined ${styles.logoutIcon}`}
               >
