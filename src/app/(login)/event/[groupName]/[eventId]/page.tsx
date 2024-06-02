@@ -116,12 +116,11 @@ export default function Page({
                 <strong>Llegada: </strong>
               </label>
               <input
-                placeholder="00:00"
                 type="time"
                 defaultValue={
                   event.extendedProps.timeStart
                     ? event.extendedProps.timeStart
-                    : ''
+                    : '00:00'
                 }
                 id="timeStart"
               ></input>
@@ -131,9 +130,8 @@ export default function Page({
                 <strong>Comienzo: </strong>
               </label>
               <input
-                placeholder="00:00"
                 type="time"
-                defaultValue={event.time ? event.time : ''}
+                defaultValue={event.time ? event.time : '00:00'}
                 id="time"
               ></input>
             </div>
