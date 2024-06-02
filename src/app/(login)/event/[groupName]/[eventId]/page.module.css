@@ -37,7 +37,9 @@
 
 .event > form input[type='time'] {
   display: flex;
-  width: 80px;
+  width: 100px;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .event > form input:nth-child(1) {
@@ -92,7 +94,7 @@
 .event .currency > input {
   outline: none;
   font-size: 17px;
-  width: 60px;
+  width: 80px;
   text-align: end;
   -webkit-appearance: none;
   margin: 0;
